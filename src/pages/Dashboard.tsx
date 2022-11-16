@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Data from "../assets/ap.json";
+import DogImage from "../assets/undraw_dog_re_7980.svg";
+import ReactCSSTransitionGroup from "react-transition-group"; // ES6
+import Button from "../components/Button";
 
 type Props = {};
 
@@ -9,6 +12,27 @@ const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   height: 60vh;
+  .welcome {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  .welcome div {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .welcome p {
+    font-size: 1.2rem;
+    font-family: "Open Sans";
+    margin: 1rem 0;
+  }
+  .welcome p span {
+    color: #ffa500;
+  }
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -16,7 +40,7 @@ const Wrapper = styled.main`
     justify-content: center;
   }
   div h2 {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     margin: 0 0 3rem 0;
   }
   div img {
@@ -29,51 +53,82 @@ const Wrapper = styled.main`
     display: flex;
     gap: 0.5rem;
   }
-  button {
-    border-radius: 0.5rem;
-    background-color: transparent;
-    color: #ffa500;
-    border: 1px solid #ffa500;
-    padding: 0.8rem 1.5rem;
-    transition: 0.3s;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #ffa500;
-    color: #242424;
-  }
 `;
 
 const Dashboard = (props: Props) => {
-  const dados = Data;
+  const [dados, setDados] = useState(Data);
+  const [welcome, setWelcome] = useState<boolean>(true);
   const [first, setfirst] = useState<boolean>(false);
   const [item, setItem] = useState(0);
 
-  function changeItem(){
-    setfirst(false)
-    setItem(item+1);
+  function changeItem(itensFrente: number) {
+    setfirst(false);
+    if (itensFrente) {
+      dados.splice(item + itensFrente, 0, dados[item]);
+      setDados(dados);
+    }
+    setItem(item + 1);
   }
 
   return (
     <Wrapper>
-      <div className="wrapper">
-        <img
-          src={`https://cdn-icons-png.flaticon.com/512/206/${dados[item].url}`}
-          alt={`${dados[item].url}`}
-        />
-        {first && <h2>{dados[item].name}</h2>}
-        {!first && <h2 className="dot">.</h2>}
-        {!first && <button onClick={()=>setfirst(true)}>Mostrar</button>}
-        {first && (
-          <div className="seguintes">
-            <button onClick={()=>changeItem()}>Repetir</button>
-            <button onClick={()=>changeItem()}>Difícil</button>
-            <button onClick={()=>changeItem()}>Normal</button>
-            <button onClick={()=>changeItem()}>Fácil</button>
+      {welcome ? (
+        <div className="welcome">
+          <div>
+            <h3>Olá!</h3>
+            <p>
+              Nosso método é <span>simples</span>, verifique se sabe qual é a
+              bandeira apresentada
+            </p>
+            <p>Depois clique em mostrar para conferir a resposta</p>
+            <p>
+              Informe a <span>dificuldade</span> que teve em encontrar a
+              resposta
+            </p>
+            <p>
+              Nós <span>adaptamos o conteúdo</span> de acordo com a facilidade
+              que você informa.
+            </p>
+            <span onClick={() => setWelcome(false)}>
+              <Button color="#ffa500" text="Iniciar" />
+            </span>
           </div>
+          <img src={DogImage} alt="" />
+        </div>
+      ) : (
+        <div className="wrapper">
+          <img
+            src={`https://cdn-icons-png.flaticon.com/512/206/${dados[item].url}`}
+            alt={`${dados[item].url}`}
+          />
+          {first && <h2>{dados[item].name}</h2>}
+          {!first && <h2 className="dot">.</h2>}
+          {!first && (
+            <span onClick={() => setfirst(true)}>
+              <Button color="#ffa500" text="Mostrar" />
+            </span>
           )}
-      </div>
+          {first && (
+            <div className="seguintes">
+              <span onClick={() => changeItem(2)}>
+                <Button color="#f88" text="Repetir" />
+              </span>
+              <span onClick={() => changeItem(4)}>
+                {" "}
+                <Button color="#ffa500" text="Difícil" />
+              </span>
+              <span onClick={() => changeItem(7)}>
+                {" "}
+                <Button color="#8f8" text="Normal" />
+              </span>
+              <span onClick={() => changeItem(0)}>
+                {" "}
+                <Button color="#88f" text="Fácil" />
+              </span>
+            </div>
+          )}
+        </div>
+      )}
     </Wrapper>
   );
 };
