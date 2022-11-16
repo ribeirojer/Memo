@@ -9,7 +9,7 @@ const Wrapper = styled.header`
   justify-content: center;
   align-items: center;
   div {
-    width: 500px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,13 @@ const Wrapper = styled.header`
   }
   div span {
     color: #ffa500;
-  }  
+  }
+  div p {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    line-height: 2rem;
+  }
   .button_login {
     border-radius: 0.5rem;
     background-color: transparent;
@@ -39,10 +45,10 @@ const Hero = (props: Props) => {
   return (
       <Wrapper>
         <div>
-          <h2>Somos a <span>Memo</span> uma plataforma de aprendizado ativo</h2>
+          <h1>Somos a <span>Memo</span> uma plataforma de aprendizado ativo</h1>
           <p>Repetição espaçada aliada a inteligência artificial criaram o melhor dos mundos em educação</p>
           <Link to={'/dashboard'}>
-            <button className='button_login'>Começar!</button>
+            <button className='button_login'>Experimentar!</button>
           </Link>
         </div>
       </Wrapper>

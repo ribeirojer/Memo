@@ -21,18 +21,6 @@ const Wrapper = styled.header`
   .logo h1 {
     color: #fff;
   }
-  .navbar ul {
-    display: flex;
-  }
-  .navbar ul li {
-    padding: 0 1rem;
-    list-style-type: none;
-  }
-  .navbar ul li a {
-    font-size: 1.2rem;
-    color: #fff;
-    text-decoration: none;
-  }
   .button_cadastrar, .button_login {
     border-radius: 0.5rem;
     background-color: transparent;
@@ -64,20 +52,7 @@ const Header = (props: Props) => {
         <Link to={'/'} className="logo">
           <Dog size={48} />
           <h1>Memo</h1>
-        </Link>  
-        <nav id="navbar" className="navbar">
-          <ul>
-            <li>
-              <Link to={'/sobre'}>Sobre</Link>
-            </li>
-            <li>
-              <Link to={'/dashboard'}>Países</Link>
-            </li>
-            <li>
-              <Link to={'/contato'}>Contato</Link>
-            </li>
-          </ul>
-        </nav>
+        </Link>
         <div>
           <button className="button_cadastrar">Cadastrar</button>
           <Link to={"/login"}>

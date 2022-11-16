@@ -40,6 +40,10 @@ const Wrapper = styled.footer`
       flex-direction: row;
       justify-content: center;
     }
+    .company p {
+      margin: 0.8rem 0;
+      font-size: 1.2rem;
+    }
     div a {
       color: #ffffff;
       margin: 0 0.5rem;
@@ -49,7 +53,7 @@ const Wrapper = styled.footer`
     .company a:hover {
       color: #ffa500;
     }
-    .last p span {
+    .last p span, .company p span {
       color: #ffa500;
     }
     .last a {
@@ -71,8 +75,7 @@ const Footer = (props: Props) => {
           <Dog size={48} />
           <h2>Memo</h2>
         </Link>  
-        <p>Aprendizagem de uma forma nunca vista</p>
-        <p>Repetição espaçada inteligente</p>
+        <p>Repetição espaçada <span>inteligente </span></p>
         <div>
           <a href='https://www.facebook.com' target={'_blank'}><FacebookLogo size={32} /></a>
           <a href='https://www.twitter.com' target={'_blank'}><TwitterLogo size={32} /></a>
