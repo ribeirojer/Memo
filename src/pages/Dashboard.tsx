@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import Data from "../assets/ap.json";
 import DogImage from "../assets/undraw_dog_re_7980.svg";
-import ReactCSSTransitionGroup from "react-transition-group"; // ES6
 import Button from "../components/Button";
 
 type Props = {};
@@ -27,7 +26,6 @@ const Wrapper = styled.main`
   }
   .welcome p {
     font-size: 1.2rem;
-    font-family: "Open Sans";
     margin: 1rem 0;
   }
   .welcome p span {
@@ -61,7 +59,7 @@ const Dashboard = (props: Props) => {
   const [first, setfirst] = useState<boolean>(false);
   const [item, setItem] = useState(0);
 
-  function changeItem(itensFrente: number) {
+  function changeItem(itensFrente: number): void {
     setfirst(false);
     if (itensFrente) {
       dados.splice(item + itensFrente, 0, dados[item]);
@@ -90,7 +88,7 @@ const Dashboard = (props: Props) => {
               que você informa.
             </p>
             <span onClick={() => setWelcome(false)}>
-              <Button color="#ffa500" text="Iniciar" />
+              <Button color="#12263a" theme="#ffa500" text="Iniciar" />
             </span>
           </div>
           <img src={DogImage} alt="" />
@@ -105,25 +103,25 @@ const Dashboard = (props: Props) => {
           {!first && <h2 className="dot">.</h2>}
           {!first && (
             <span onClick={() => setfirst(true)}>
-              <Button color="#ffa500" text="Mostrar" />
+              <Button color="#12263a" theme="#ffa500" text="Mostrar" />
             </span>
           )}
           {first && (
             <div className="seguintes">
               <span onClick={() => changeItem(2)}>
-                <Button color="#f88" text="Repetir" />
+                <Button theme="#12263a" color="#f88" text="Repetir" />
               </span>
               <span onClick={() => changeItem(4)}>
                 {" "}
-                <Button color="#ffa500" text="Difícil" />
+                <Button theme="#12263a" color="#ffa500" text="Difícil" />
               </span>
               <span onClick={() => changeItem(7)}>
                 {" "}
-                <Button color="#8f8" text="Normal" />
+                <Button theme="#12263a" color="#8f8" text="Normal" />
               </span>
               <span onClick={() => changeItem(0)}>
                 {" "}
-                <Button color="#88f" text="Fácil" />
+                <Button theme="#12263a" color="#88f" text="Fácil" />
               </span>
             </div>
           )}

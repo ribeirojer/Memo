@@ -2,7 +2,6 @@ import { Dog } from "phosphor-react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
-import ButtonA from "./ButtonA";
 
 type Props = {}
 
@@ -38,10 +37,10 @@ const Header = (props: Props) => {
         </Link>
         <div>
           <Link to={"/login"}>
-            <Button color={'#ffa500'} text={'Cadastrar'} />
+            <Button color={'#ffa500'} theme={'#12263a'} text={'Login'} />
           </Link>
           <Link to={"/login"}>
-            <ButtonA color={'#ffa500'} text={'Login'} />
+            <Button color={'#12263a'} theme={'#ffa500'} text={'Cadastrar'} />
           </Link>
         </div>
     </Wrapper>
