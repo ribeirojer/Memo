@@ -41,16 +41,14 @@ const Wrapper = styled.main`
 `;
 
 const Content = ({
-  id,
   link,
   name,
 }: {
-  id: number;
   link: string;
   name: string;
 }) => {
   return (
-    <Wrapper key={id}>
+    <Wrapper>
       <img src={link} alt={name} />
       <div className="card-wrapper">
         <div>

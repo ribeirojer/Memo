@@ -214,7 +214,7 @@ const Home = (props: Props) => {
       <div className="content">
         {data &&
           data.map((item) => {
-            return <Content id={item.id} link={item.link} name={item.name} />;
+            return <Content key={item.id} link={item.link} name={item.name} />;
           })}
       </div>
       <section className="claim">
