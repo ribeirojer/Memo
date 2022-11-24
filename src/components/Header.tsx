@@ -26,6 +26,15 @@ const Wrapper = styled.header`
     display: flex;
     gap: 1rem;
   }
+  
+  @media (max-width: 425px) {
+    .loginWrapper {
+      display: none;
+    }
+    .burguer {
+      display: block;
+    }
+}
 `;
 
 const Header = (props: Props) => {
@@ -35,13 +44,16 @@ const Header = (props: Props) => {
           <Dog size={48} />
           <h1>Memo</h1>
         </Link>
-        <div>
+        <div className="loginWrapper">
           <Link to={"/login"}>
             <Button color={'#ffa500'} theme={'#12263a'} text={'Login'} />
           </Link>
           <Link to={"/login"}>
             <Button color={'#12263a'} theme={'#ffa500'} text={'Cadastrar'} />
           </Link>
+        </div>
+        <div className="burguer">
+          <span>hhh</span>
         </div>
     </Wrapper>
   )

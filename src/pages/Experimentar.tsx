@@ -51,6 +51,14 @@ const Wrapper = styled.main`
     display: flex;
     gap: 0.5rem;
   }
+
+  @media (max-width: 425px) {
+    .welcome div {
+      margin-top: 0rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 const Experimentar = (props: Props) => {

@@ -51,6 +51,25 @@ const Wrapper = styled.main`
     display: flex;
     gap: 0.5rem;
   }
+  @media (max-width: 425px) {
+    height: unset;
+    .welcome {
+      flex-direction: column;
+      gap: 4rem;
+    }
+    .welcome div {
+      width: 88vw;
+    }
+    .welcome p {
+      text-align: center;
+    }
+    .welcome img {
+      width: 90vw;
+    }
+    .wrapper {
+      margin-top: 3rem;
+    }
+  }
 `;
 
 const Dashboard = (props: Props) => {

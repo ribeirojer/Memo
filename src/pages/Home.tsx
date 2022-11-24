@@ -129,6 +129,26 @@ const Wrapper = styled.header`
     color: #ffa500;
     font-size: 3rem;
   }
+
+  @media (max-width: 425px) {
+    .footer {
+      flex-direction: column;
+    }
+    .content {
+      justify-content: center;
+    }
+    .claim {
+      padding: 2rem;
+    }
+    .claim h2 {
+      font-size: 1.2rem;
+    }
+    .footer {
+      height: unset;
+      margin: 2rem 0;
+      gap: 2rem;
+    }
+  }
 `;
 
 const Home = (props: Props) => {
