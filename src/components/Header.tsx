@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
 
-type Props = {}
+type Props = {};
 
 const Wrapper = styled.header`
   padding: 1rem 2rem;
@@ -26,6 +26,9 @@ const Wrapper = styled.header`
     display: flex;
     gap: 1rem;
   }
+  .burguer {
+    display: none;
+  }
   
   @media (max-width: 425px) {
     .loginWrapper {
@@ -34,29 +37,29 @@ const Wrapper = styled.header`
     .burguer {
       display: block;
     }
-}
+  }
 `;
 
 const Header = (props: Props) => {
   return (
     <Wrapper id="header">
-        <Link to={'/'} className="logo">
-          <Dog size={48} />
-          <h1>Memo</h1>
+      <Link to={"/"} className="logo">
+        <Dog size={48} />
+        <h1>Memo</h1>
+      </Link>
+      <div className="loginWrapper">
+        <Link to={"/login"}>
+          <Button color={"#ffa500"} theme={"#12263a"} text={"Login"} />
         </Link>
-        <div className="loginWrapper">
-          <Link to={"/login"}>
-            <Button color={'#ffa500'} theme={'#12263a'} text={'Login'} />
-          </Link>
-          <Link to={"/login"}>
-            <Button color={'#12263a'} theme={'#ffa500'} text={'Cadastrar'} />
-          </Link>
-        </div>
-        <div className="burguer">
-          <span>hhh</span>
-        </div>
+        <Link to={"/login"}>
+          <Button color={"#12263a"} theme={"#ffa500"} text={"Cadastrar"} />
+        </Link>
+      </div>
+      <div className="burguer">
+        <span>hhh</span>
+      </div>
     </Wrapper>
-  )
-}
+  );
+};
 
 export default Header;
