@@ -92,20 +92,8 @@ const Dashboard = (props: Props) => {
       {welcome ? (
         <div className="welcome">
           <div>
-            <h3>Olá!</h3>
-            <p>
-              Nosso método é <span>simples</span>, verifique se sabe qual é a
-              bandeira apresentada
-            </p>
-            <p>Depois clique em mostrar para conferir a resposta</p>
-            <p>
-              Informe a <span>dificuldade</span> que teve em encontrar a
-              resposta
-            </p>
-            <p>
-              Nós <span>adaptamos o conteúdo</span> de acordo com a facilidade
-              que você informa.
-            </p>
+            <h3>Conteúdo de {}</h3>
+            <p>Restam {} cartões de conteúdo para você revisar</p>
             <span onClick={() => setWelcome(false)}>
               <Button color="#12263a" theme="#ffa500" text="Iniciar" />
             </span>

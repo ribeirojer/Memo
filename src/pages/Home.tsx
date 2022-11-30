@@ -226,7 +226,7 @@ const Home = (props: Props) => {
             Repetição espaçada aliada a inteligência artificial criaram o melhor
             dos mundos em educação
           </p>
-          <Link to={"/dashboard"}>
+          <Link to={"/experimentar"}>
             <Button color={"#12263a"} theme={"#ffa500"} text="Experimentar" />
           </Link>
         </div>
@@ -239,7 +239,7 @@ const Home = (props: Props) => {
       </div>
       <section className="claim">
         <h2>Repetição, com correção, a exaustão, leva a perfeição.</h2>
-        <Link to={"/dashboard"}>
+        <Link to={"/experimentar"}>
           <Button
             color={"#ffa500"}
             theme={"#12263a"}
