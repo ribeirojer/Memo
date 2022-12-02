@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Data from "../assets/ap.json";
 import DogImage from "../assets/undraw_dog_re_7980.svg";
 import Button from "../components/Button";
+import { useParams } from "react-router-dom";
 
 type Props = {};
 
@@ -77,6 +78,21 @@ const Dashboard = (props: Props) => {
   const [welcome, setWelcome] = useState<boolean>(true);
   const [first, setfirst] = useState<boolean>(false);
   const [item, setItem] = useState(0);
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  console.log(id);
+
+  const getCards = async (url: string) => {
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data);
+    setMovie(data);
+  };
+
+  useEffect(() => {
+    const cardUrl = `${id}?`;
+    getCards(cardUrl);
+  }, []);
 
   function changeItem(itensFrente: number): void {
     setfirst(false);
