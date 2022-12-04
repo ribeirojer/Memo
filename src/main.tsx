@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Experimentar from './pages/Experimentar'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import NotFound from './pages/NotFound'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   //<React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="login" element={<Login />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="experimentar" element={<Experimentar />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
