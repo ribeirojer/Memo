@@ -37,72 +37,71 @@ app.post("/flashcard", async (req, res) => {
   }
 });
 
-app.get("/person", async (req, res) => {
+app.get("/flashcard", async (req, res) => {
   try {
-    const people = await Person.find();
+    const cards = await FlashCard.find();
 
-    res.status(200).json(people);
+    res.status(200).json(cards);
   } catch (error) {
     res.status(500).json({ erro: error });
   }
 });
 
-app.get("/person/:id", async (req, res) => {
+app.get("/flashcard/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const person = await Person.findOne({ _id: id });
+    const card = await FlashCard.findOne({ _id: id });
 
-    if (!person) {
-      res.status(422).json({ message: "Usuário não encontrado!" });
+    if (!card) {
+      res.status(422).json({ message: "FlashCard não encontrado!" });
       return;
     }
 
-    res.status(200).json(person);
+    res.status(200).json(card);
   } catch (error) {
     res.status(500).json({ erro: error });
   }
 });
 
-app.patch("/person/:id", async (req, res) => {
+app.patch("/flashcard/:id", async (req, res) => {
   const id = req.params.id;
 
-  const { name, salary, approved } = req.body;
+  const { question, response } = req.body;
 
-  const person = {
-    name,
-    salary,
-    approved,
+  const card = {
+    question,
+    response,
   };
 
   try {
-    const updatedPerson = await Person.updateOne({ _id: id }, person);
+    const updatedCard = await FlashCard.updateOne({ _id: id }, card);
 
-    if (updatedPerson.matchedCount === 0) {
-      res.status(422).json({ message: "Usuário não encontrado!" });
+    if (updatedCard.matchedCount === 0) {
+      res.status(422).json({ message: "FlashCard não encontrado!" });
       return;
     }
 
-    res.status(200).json(person);
+    res.status(200).json(card);
   } catch (error) {
     res.status(500).json({ erro: error });
   }
 });
 
-app.delete("/person/:id", async (req, res) => {
+app.delete("/flashcard/:id", async (req, res) => {
   const id = req.params.id;
 
-  const person = await Person.findOne({ _id: id });
+  const card = await FlashCard.findOne({ _id: id });
 
-  if (!person) {
-    res.status(422).json({ message: "Usuário não encontrado!" });
+  if (!card) {
+    res.status(422).json({ message: "FlashCard não encontrado!" });
     return;
   }
 
   try {
-    await Person.deleteOne({ _id: id });
+    await FlashCard.deleteOne({ _id: id });
 
-    res.status(200).json({ message: "Usuário removido com sucesso!" });
+    res.status(200).json({ message: "FlashCard removido com sucesso!" });
   } catch (error) {
     res.status(500).json({ erro: error });
   }
