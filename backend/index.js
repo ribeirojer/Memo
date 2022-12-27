@@ -2,11 +2,14 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 const data = require("./data.json");
 
 // depois do db
 const mongoose = require("mongoose");
-const Person = require("./models/Person");
+const FlashCard = require("./models/FlashCard");
 
 app.use(
   express.urlencoded({
@@ -16,21 +19,19 @@ app.use(
 app.use(express.json());
 
 // rotas
-app.post("/person", async (req, res) => {
-  const { name, salary, approved } = req.body;
+app.post("/flashcard", async (req, res) => {
+  const { question, response } = req.body;
 
-  const person = {
-    name,
-    salary,
-    approved,
+  const card = {
+    question,
+    response,
   };
-
   try {
-    await Person.create(person);
+    await FlashCard.create(card);
 
     res
       .status(201)
-      .json({ message: "Pessoa inserida no sistema com sucesso!" });
+      .json({ message: "FlashCard inserido no sistema com sucesso!" });
   } catch (error) {
     res.status(500).json({ erro: error });
   }
@@ -111,8 +112,8 @@ app.get("/", (req, res) => {
   return res.json(data);
 });
 
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
 
 mongoose
   .connect(

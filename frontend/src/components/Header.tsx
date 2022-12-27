@@ -51,8 +51,8 @@ const Header = (props: Props) => {
         <Link to={"/login"}>
           <Button color={"#ffa500"} theme={"#12263a"} text={"Login"} />
         </Link>
-        <Link to={"/login"}>
-          <Button color={"#12263a"} theme={"#ffa500"} text={"Cadastrar"} />
+        <Link to={"/sendcard"}>
+          <Button color={"#12263a"} theme={"#ffa500"} text={"FlashCard"} />
         </Link>
       </div>
       <div className="burguer">
