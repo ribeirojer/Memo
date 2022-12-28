@@ -54,6 +54,9 @@ const Header = (props: Props) => {
         <Link to={"/sendcard"}>
           <Button color={"#12263a"} theme={"#ffa500"} text={"FlashCard"} />
         </Link>
+        <Link to={"/listcards"}>
+          <Button color={"#12263a"} theme={"#ffa500"} text={"Listcards"} />
+        </Link>
       </div>
       <div className="burguer">
         <span>hhh</span>

@@ -3,14 +3,13 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
-app.use(cors());
 const data = require("./data.json");
 
 // depois do db
 const mongoose = require("mongoose");
 const FlashCard = require("./models/FlashCard");
 
+app.use(cors());
 app.use(
   express.urlencoded({
     extended: true,
@@ -20,11 +19,12 @@ app.use(express.json());
 
 // rotas
 app.post("/flashcard", async (req, res) => {
-  const { question, response } = req.body;
+  const { question, response, subject } = req.body;
 
   const card = {
     question,
     response,
+    subject,
   };
   try {
     await FlashCard.create(card);
@@ -67,11 +67,12 @@ app.get("/flashcard/:id", async (req, res) => {
 app.patch("/flashcard/:id", async (req, res) => {
   const id = req.params.id;
 
-  const { question, response } = req.body;
+  const { question, response, subject } = req.body;
 
   const card = {
     question,
     response,
+    subject,
   };
 
   try {

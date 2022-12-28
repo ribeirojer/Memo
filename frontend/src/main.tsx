@@ -6,6 +6,7 @@ import './index.css'
 import Dashboard from './pages/Dashboard'
 import Experimentar from './pages/Experimentar'
 import Home from './pages/Home'
+import ListFlashCards from './pages/ListFlashCards'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import SendCard from './pages/SendCard'
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="experimentar" element={<Experimentar />} />
           <Route path="sendcard" element={<SendCard />} />
+          <Route path="listcards" element={<ListFlashCards />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

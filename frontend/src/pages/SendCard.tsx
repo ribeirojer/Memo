@@ -2,8 +2,6 @@ import axios from "axios";
 import { Dog } from "phosphor-react";
 import { useState } from "react";
 import styled from "styled-components";
-import Button from "../components/Button";
-import useFetch from "../hooks/useFetch";
 
 type Props = {};
 
@@ -24,7 +22,7 @@ const Wrapper = styled.main`
     font-weight: 600;
     display: block;
   }
-  input {
+  input, select {
     font-size: 16px;
     color: #1a1f36;
     line-height: 28px;
@@ -50,15 +48,10 @@ const Wrapper = styled.main`
   input[type="submit"]:hover {
     background-color: #dd9000;
   }
-  .card {
+  form div {
     display: flex;
-    padding: 1rem;
-    border: 1px solid #ffa500;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .card p {
-    width: 300px;
+    justify-content: space-between;
+    margin-top: 1rem;
   }
 
   @media (max-width: 425px) {
@@ -73,17 +66,31 @@ const Wrapper = styled.main`
 const SendCard = (props: Props) => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
-  const url = "http://localhost:3000/flashcard";
-  const { data, isLoading, error } = useFetch(url);
+  const [selectedOption, setSelectedOption] = useState("");
 
-  if (error) {
-    return <p>Houve um problema...</p>;
-  }
+  const options = [
+    { value: 1, label: "Língua Portuguesa" },
+    { value: 2, label: "Biologia" },
+    { value: 3, label: "Inglês" },
+    { value: 4, label: "Artes" },
+    { value: 5, label: "Matemática" },
+    { value: 6, label: "Educação Física" },
+    { value: 7, label: "Química" },
+    { value: 8, label: "Física" },
+    { value: 9, label: "História" },
+    { value: 10, label: "Geografia" },
+    { value: 11, label: "Sociologia" },
+    { value: 12, label: "Filosofia" },
+  ];
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    const data = { question: question, response: response };
+    const data = {
+      question: question,
+      response: response,
+      subject: selectedOption,
+    };
 
     try {
       const response = await axios.post(
@@ -92,33 +99,6 @@ const SendCard = (props: Props) => {
       );
       setQuestion("");
       setResponse("");
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const editCard = async (id: string) => {
-    const data = { question: question, response: response };
-
-    try {
-      const response = await axios.patch(
-        `http://localhost:3000/flashcard/${id}`,
-        data
-      );
-      setQuestion("");
-      setResponse("");
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const removeCard = async (id: string) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/flashcard/${id}`
-      );
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -143,26 +123,21 @@ const SendCard = (props: Props) => {
           name="response"
           placeholder="Insira a resposta"
         />
+        <div>
+          <label htmlFor="subject">Disciplina</label>
+          <select
+            value={selectedOption}
+            onChange={(event) => setSelectedOption(event.target.value)}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
         <input type="submit" name="submit" value="Enviar" />
       </form>
-      {isLoading ? (
-        <p>carrgando...</p>
-      ) : (
-        data.map((item: any) => {
-          return (
-            <div key={item._id} className="card">
-              <p>{item.question}</p>
-              <p>{item.response}</p>
-              <span onClick={() => editCard(item._id)}>
-                <Button color="#12263a" theme="#55f" text="Editar" />
-              </span>
-              <span onClick={() => removeCard(item._id)}>
-                <Button color="#12263a" theme="#f55" text="Excluir" />
-              </span>
-            </div>
-          );
-        })
-      )}
     </Wrapper>
   );
 };
