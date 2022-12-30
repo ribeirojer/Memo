@@ -10,10 +10,8 @@ const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  width: 100%;
-  max-width: 448px;
-  border-radius: 0.5rem;
   form {
+    width: 500px;
     margin: 0 0 2rem 0;
   }
   label {
@@ -22,7 +20,8 @@ const Wrapper = styled.main`
     font-weight: 600;
     display: block;
   }
-  input, select {
+  input,
+  select {
     font-size: 16px;
     color: #1a1f36;
     line-height: 28px;
@@ -48,6 +47,9 @@ const Wrapper = styled.main`
   input[type="submit"]:hover {
     background-color: #dd9000;
   }
+  select {
+    width: 50%;
+  }
   form div {
     display: flex;
     justify-content: space-between;
@@ -66,7 +68,7 @@ const Wrapper = styled.main`
 const SendCard = (props: Props) => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("1");
 
   const options = [
     { value: 1, label: "Língua Portuguesa" },
