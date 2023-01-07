@@ -39,10 +39,11 @@ function checkToken(req, res, next) {
     res.status(400).json({ msg: "O Token é inválido!" });
   }
 }
+
 // Private Route
 app.get("/user/:id", checkToken, async (req, res) => {
   const id = req.params.id;
-
+  console.log(id);
   // check if user exists
   const user = await User.findById(id, "-password");
 
@@ -120,7 +121,8 @@ app.post("/auth/login", async (req, res) => {
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });
   }
-
+  console.log(password);
+  console.log(user);
   // check if password match
   const checkPassword = await bcrypt.compare(password, user.password);
 
