@@ -30,7 +30,13 @@ const Wrapper = styled.header`
   .burguer {
     display: none;
   }
-  
+  .loginWrapper li {
+    list-style-type: none;
+  }
+  .loginWrapper ul {
+    display: flex;
+    gap: 1rem;
+  }
   @media (max-width: 425px) {
     .loginWrapper {
       display: none;
@@ -42,81 +48,63 @@ const Wrapper = styled.header`
 `;
 
 const Header = (props: Props) => {
-  const { auth } = useAuth();
-  const { user } = useSelector((state) => state.auth);
+  const auth = "";
+  const user = "";
 
   const navigate = useNavigate();
 
-  const [query, setQuery] = useState("");
-
   const handleLogout = () => {
-
     navigate("/login");
   };
 
-  const handleSearch = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-
-    if (query) {
-      return navigate(`/search?q=${query}`);
-    }
-  };
   return (
     <Wrapper id="header">
       <Link to={"/"} className="logo">
         <Dog size={48} />
         <h1>Memo</h1>
       </Link>
-      
-    <nav id="nav">
-      <ul id="nav-links">
-        {auth ? (
-          <>
-            <li>
-              <NavLink to="/">
-                {/*<BsHouseDoorFill />*/}
-              </NavLink>
-            </li>
-            {user && (
+
+      <nav id="nav" className="loginWrapper">
+        <ul id="nav-links">
+          {auth ? (
+            <>
               <li>
-                <NavLink to={`/users/${user._id}`}>
-                  {/*<BsFillCameraFill />*/}
+                <NavLink to="/">{/*<BsHouseDoorFill />*/}</NavLink>
+              </li>
+              {user && (
+                <li>
+                  <NavLink to={`/users/${user}`}>
+                    {/*<BsFillCameraFill />*/}
+                  </NavLink>
+                </li>
+              )}
+              <li>
+                <NavLink to="/profile">{/*<BsFillPersonFill />*/}</NavLink>
+              </li>
+              <li>
+                <span onClick={handleLogout}>Sair</span>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/login">
+                  <Button color={"#ffa500"} theme={"#12263a"} text={"Login"} />
                 </NavLink>
               </li>
-            )}
-            <li>
-              <NavLink to="/profile">
-                {/*<BsFillPersonFill />*/}
-              </NavLink>
-            </li>
-            <li>
-              <span onClick={handleLogout}>Sair</span>
-            </li>
-          </>
-        ) : (
-          <>
-            {" "}
-            <li>
-              <NavLink to="/login">Entrar</NavLink>
-            </li>
-            <li>
-              <NavLink to="/register">Cadastrar</NavLink>
-            </li>
-          </>
-        )}
-      </ul>
-    </nav>
-      <div className="loginWrapper">
-        <Link to={"/login"}>
-          <Button color={"#ffa500"} theme={"#12263a"} text={"Login"} />
-        </Link>
-        <Link to={"/sendcard"}>
-          <Button color={"#12263a"} theme={"#ffa500"} text={"FlashCard"} />
-        </Link>
-        <Link to={"/listcards"}>
-          <Button color={"#12263a"} theme={"#ffa500"} text={"Listcards"} />
-        </Link>
-      </div>
+              <li>
+                <NavLink to="/register">
+                  <Button
+                    color={"#12263a"}
+                    theme={"#ffa500"}
+                    text={"Cadastrar"}
+                  />
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
       <div className="burguer">
         <span>hhh</span>
       </div>
@@ -125,11 +113,10 @@ const Header = (props: Props) => {
 };
 
 export default Header;
-function useAuth(): { auth: any; } {
+function useAuth(): { auth: any } {
   throw new Error("Function not implemented.");
 }
 
-function useSelector(arg0: (state: any) => any): { user: any; } {
+function useSelector(arg0: (state: any) => any): { user: any } {
   throw new Error("Function not implemented.");
 }
-

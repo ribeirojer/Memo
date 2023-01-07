@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import ListFlashCards from './pages/ListFlashCards'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
+import Register from './pages/Register'
 import SendCard from './pages/SendCard'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route element={<App />}>        
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="experimentar" element={<Experimentar />} />
           <Route path="sendcard" element={<SendCard />} />
