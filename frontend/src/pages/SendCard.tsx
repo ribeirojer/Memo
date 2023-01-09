@@ -9,9 +9,10 @@ type Props = {};
 
 const Wrapper = styled.main`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 2rem;
+  gap: 2rem;
   form {
     width: 500px;
     margin: 0 0 2rem 0;
@@ -131,8 +132,8 @@ const SendCard = (props: Props) => {
 
   return (
     <Wrapper>
-      <Dog size={54} color={"#ffa500"} />
       <form onSubmit={handleSubmit}>
+        <Dog size={54} color={"#ffa500"} />
         <label htmlFor="question">Questão</label>
         <input
           onChange={(e) => setQuestion(e.target.value)}
@@ -162,12 +163,14 @@ const SendCard = (props: Props) => {
         </div>
         <input type="submit" name="submit" value="Enviar" />
       </form>
-      {isShowItens ? null : (
-        <ListCards editCard={editCard} removeCard={removeCard} />
-      )}
-      <span onClick={() => setIsShowItens(!isShowItens)}>
-        <Button color="#12263a" theme="#ffa500" text="Mostar" />
-      </span>
+      <div>
+        <span onClick={() => setIsShowItens(!isShowItens)}>
+          <Button color="#12263a" theme="#ffa500" text="Mostar" />
+        </span>
+        {isShowItens ? null : (
+          <ListCards editCard={editCard} removeCard={removeCard} />
+        )}
+      </div>
     </Wrapper>
   );
 };

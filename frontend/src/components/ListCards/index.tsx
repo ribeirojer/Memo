@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import useFetch from "../hooks/useFetch";
-import Button from "./Button";
+import useFetch from "../../hooks/useFetch";
+import Button from "../Button";
 
 type Props = {
   editCard: any;
