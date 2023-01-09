@@ -12,8 +12,7 @@ const User = require("./models/User");
 const FlashCard = require("./models/FlashCard");
 
 // Solve CORS
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-//app.use(cors());outra opção
+app.use(cors());
 app.use(
   express.urlencoded({
     extended: true,

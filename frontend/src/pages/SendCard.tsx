@@ -2,6 +2,8 @@ import axios from "axios";
 import { Dog } from "phosphor-react";
 import { useState } from "react";
 import styled from "styled-components";
+import Button from "../components/Button";
+import ListCards from "../components/ListCards";
 
 type Props = {};
 
@@ -55,20 +57,13 @@ const Wrapper = styled.main`
     justify-content: space-between;
     margin-top: 1rem;
   }
-
-  @media (max-width: 425px) {
-    .welcome div {
-      margin-top: 0rem;
-      display: flex;
-      flex-direction: column;
-    }
-  }
 `;
 
 const SendCard = (props: Props) => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
   const [selectedOption, setSelectedOption] = useState("1");
+  const [isShowItens, setIsShowItens] = useState(false);
 
   const options = [
     { value: 1, label: "Língua Portuguesa" },
@@ -84,6 +79,33 @@ const SendCard = (props: Props) => {
     { value: 11, label: "Sociologia" },
     { value: 12, label: "Filosofia" },
   ];
+
+  const editCard = async (id: string) => {
+    const data = { question: question, response: response };
+
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/flashcard/${id}`,
+        data
+      );
+      setQuestion("");
+      setResponse("");
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const removeCard = async (id: string) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/flashcard/${id}`
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -140,6 +162,12 @@ const SendCard = (props: Props) => {
         </div>
         <input type="submit" name="submit" value="Enviar" />
       </form>
+      {isShowItens ? null : (
+        <ListCards editCard={editCard} removeCard={removeCard} />
+      )}
+      <span onClick={() => setIsShowItens(!isShowItens)}>
+        <Button color="#12263a" theme="#ffa500" text="Mostar" />
+      </span>
     </Wrapper>
   );
 };
