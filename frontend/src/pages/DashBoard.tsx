@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, SetStateAction } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Content from "../components/Content";
 
@@ -27,9 +28,11 @@ const Wrapper = styled.header`
     height: 150px;
   }
 `;
+
 const DashBoard = (props: Props) => {
   const [user, setUser] = useState<any>({});
   const [token] = useState(localStorage.getItem("token") || "");
+  const navigate = useNavigate();
 
   const subjects = [
     {
@@ -106,6 +109,10 @@ const DashBoard = (props: Props) => {
       });
   }, [token]);
 
+  function handleNavigate(id: number) {
+    navigate(`/exercises/${id}`);
+  }
+
   return (
     <Wrapper>
       <div className="card">
@@ -115,7 +122,11 @@ const DashBoard = (props: Props) => {
       <div className="content">
         {subjects &&
           subjects.map((item) => {
-            return <Content key={item.id} link={item.link} name={item.name} />;
+            return (
+              <span onClick={() => handleNavigate(item.id)} key={item.id}>
+                <Content link={item.link} name={item.name} />
+              </span>
+            );
           })}
       </div>
     </Wrapper>
