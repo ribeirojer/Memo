@@ -89,16 +89,16 @@ const Header = (props: Props) => {
             <>
               <li>
                 <NavLink to="/login">
-                  <Button color={"#ffa500"} theme={"#12263a"} text={"Login"} />
+                  <Button color={"#ffa500"} theme={"#12263a"}>
+                    Login
+                  </Button>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/register">
-                  <Button
-                    color={"#12263a"}
-                    theme={"#ffa500"}
-                    text={"Cadastrar"}
-                  />
+                  <Button color={"#12263a"} theme={"#ffa500"}>
+                    Cadastrar
+                  </Button>
                 </NavLink>
               </li>
             </>

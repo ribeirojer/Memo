@@ -82,7 +82,11 @@ const SendCard = (props: Props) => {
   ];
 
   const editCard = async (id: string) => {
-    const data = { question: question, response: response };
+    const data = {
+      question,
+      response,
+      subject: selectedOption,
+    };
 
     try {
       const response = await axios.patch(
@@ -165,11 +169,13 @@ const SendCard = (props: Props) => {
       </form>
       <div>
         <span onClick={() => setIsShowItens(!isShowItens)}>
-          <Button color="#12263a" theme="#ffa500">Mostar</Button>
+          <Button color="#12263a" theme="#ffa500">
+            Mostar
+          </Button>
         </span>
-        {isShowItens ? null : (
+        {isShowItens ? (
           <ListCards editCard={editCard} removeCard={removeCard} />
-        )}
+        ) : null}
       </div>
     </Wrapper>
   );

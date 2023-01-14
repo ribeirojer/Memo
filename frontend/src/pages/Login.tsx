@@ -1,6 +1,8 @@
+import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup, User } from "firebase/auth";
 import { Dog, FacebookLogo, GithubLogo, GoogleLogo } from "phosphor-react";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
 
@@ -70,23 +72,28 @@ const Wrapper = styled.main`
 `;
 
 const Login = (props: Props) => {
-  const [user, setUser] = useState<User>({} as User);
-  const [name, setName] = useState("");
+  const [userFirebase, setUserFirebase] = useState<User>({} as User);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     const user = {
-      name,
       email,
       password,
-      confirmPassword,
     };
 
-    console.log(user);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        user
+      );
+        Navigate()
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   function handleGoogleSignin() {
@@ -94,7 +101,7 @@ const Login = (props: Props) => {
 
     signInWithPopup(auth, provider)
       .then((result) => {
-        setUser(result.user);
+        setUserFirebase(result.user);
       })
       .catch((error) => {
         console.log(error);
@@ -103,20 +110,30 @@ const Login = (props: Props) => {
 
   return (
     <div>
-      {user.photoURL ? (
+      {userFirebase.photoURL ? (
         <div>
-          <img src={user.photoURL} alt="foto do usuario" />
-          <p>{user.displayName}</p>
-          <p>{user.email}</p>
+          <img src={userFirebase.photoURL} alt="foto do usuario" />
+          <p>{userFirebase.displayName}</p>
+          <p>{userFirebase.email}</p>
         </div>
       ) : (
         <Wrapper>
           <Dog size={54} color={"#ffa500"} />
-          <form id="stripe-login">
+          <form id="stripe-login" onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" />
+            <input
+              type="email"
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" />
+            <input
+              type="password"
+              placeholder="Senha"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
             <input type="submit" name="submit" value="Continue" />
           </form>
           <div>

@@ -54,7 +54,7 @@ app.get("/user/:id", checkToken, async (req, res) => {
 });
 
 app.post("/auth/register", async (req, res) => {
-  const { name, email, password, confirmpassword } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
 
   // validations
   if (!name) {
@@ -69,7 +69,7 @@ app.post("/auth/register", async (req, res) => {
     return res.status(422).json({ msg: "A senha é obrigatória!" });
   }
 
-  if (password != confirmpassword) {
+  if (password !== confirmPassword) {
     return res
       .status(422)
       .json({ msg: "A senha e a confirmação precisam ser iguais!" });
@@ -90,7 +90,7 @@ app.post("/auth/register", async (req, res) => {
   const user = new User({
     name,
     email,
-    passwordHash,
+    password: passwordHash
   });
 
   try {
@@ -120,8 +120,6 @@ app.post("/auth/login", async (req, res) => {
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });
   }
-  console.log(password);
-  console.log(user);
   // check if password match
   const checkPassword = await bcrypt.compare(password, user.password);
 
