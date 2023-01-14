@@ -1,6 +1,6 @@
-import axios from "axios";
+import useAuth from "../hooks/useAuth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 type Props = {};
@@ -73,8 +73,8 @@ const Register = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const loading = "";
+  const { register, loading } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -86,16 +86,8 @@ const Register = (props: Props) => {
       confirmPassword,
     };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/register",
-        user
-      );
-
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+    register(user);
+    navigate("/dashboard");
   };
 
   return (

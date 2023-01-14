@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { IUser } from "../interfaces/user";
+import { IUser } from "../interfaces/User";
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -23,7 +23,7 @@ export default function useAuth() {
 
     try {
       const data = await axios
-        .post("/users/register", user)
+        .post("http://localhost:3000/auth/register", user)
         .then((response) => {
           return response.data;
         });
