@@ -227,7 +227,7 @@ const Home = (props: Props) => {
             dos mundos em educação
           </p>
           <Link to={"/experimentar"}>
-            <Button color={"#12263a"} theme={"#ffa500"} text="Experimentar" />
+            <Button color={"#12263a"} theme={"#ffa500"}>Experimentar</Button>
           </Link>
         </div>
       </div>
@@ -243,8 +243,7 @@ const Home = (props: Props) => {
           <Button
             color={"#ffa500"}
             theme={"#12263a"}
-            text="Experimentar"
-          ></Button>
+          >Experimentar</Button>
         </Link>
       </section>
       <section className="footer">

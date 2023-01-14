@@ -165,7 +165,7 @@ const SendCard = (props: Props) => {
       </form>
       <div>
         <span onClick={() => setIsShowItens(!isShowItens)}>
-          <Button color="#12263a" theme="#ffa500" text="Mostar" />
+          <Button color="#12263a" theme="#ffa500">Mostar</Button>
         </span>
         {isShowItens ? null : (
           <ListCards editCard={editCard} removeCard={removeCard} />

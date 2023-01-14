@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import App from './App'
 import './index.css'
-import Dashboard from './pages/Dashboard'
 import Experimentar from './pages/Experimentar'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -18,7 +17,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="dashboard" element={<Dashboard />} />
           <Route path="experimentar" element={<Experimentar />} />
           <Route path="cards" element={<SendCard />} />
           <Route path="*" element={<NotFound />} />

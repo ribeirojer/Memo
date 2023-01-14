@@ -96,7 +96,7 @@ const Experimentar = (props: Props) => {
               que você informa.
             </p>
             <span onClick={() => setWelcome(false)}>
-              <Button color="#12263a" theme="#ffa500" text="Iniciar" />
+              <Button color="#12263a" theme="#ffa500">Iniciar</Button>
             </span>
           </div>
           <img src={DogImage} alt="" />
@@ -111,25 +111,22 @@ const Experimentar = (props: Props) => {
           {!first && <h2 className="dot">.</h2>}
           {!first && (
             <span onClick={() => setfirst(true)}>
-              <Button color="#12263a" theme="#ffa500" text="Mostrar" />
+              <Button color="#12263a" theme="#ffa500">Mostrar</Button>
             </span>
           )}
           {first && (
             <div className="seguintes">
               <span onClick={() => changeItem(2)}>
-                <Button theme="#12263a" color="#f88" text="Repetir" />
+                <Button theme="#12263a" color="#f88">Repetir</Button>
               </span>
               <span onClick={() => changeItem(4)}>
-                {" "}
-                <Button theme="#12263a" color="#ffa500" text="Difícil" />
+                <Button theme="#12263a" color="#ffa500">Difícil</Button>
               </span>
               <span onClick={() => changeItem(7)}>
-                {" "}
-                <Button theme="#12263a" color="#8f8" text="Normal" />
+                <Button theme="#12263a" color="#8f8">Normal</Button>
               </span>
               <span onClick={() => changeItem(0)}>
-                {" "}
-                <Button theme="#12263a" color="#88f" text="Fácil" />
+                <Button theme="#12263a" color="#88f">Fácil</Button>
               </span>
             </div>
           )}
