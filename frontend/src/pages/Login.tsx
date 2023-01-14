@@ -2,10 +2,10 @@ import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup, User } from "firebase/auth";
 import { Dog, FacebookLogo, GithubLogo, GoogleLogo } from "phosphor-react";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
-
+import useAuth from "../hooks/useAuth";
 type Props = {};
 
 const Wrapper = styled.main`
@@ -75,6 +75,8 @@ const Login = (props: Props) => {
   const [userFirebase, setUserFirebase] = useState<User>({} as User);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -84,16 +86,8 @@ const Login = (props: Props) => {
       password,
     };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/login",
-        user
-      );
-        Navigate()
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+    login(user);
+    navigate("/dashboard");
   };
 
   function handleGoogleSignin() {
