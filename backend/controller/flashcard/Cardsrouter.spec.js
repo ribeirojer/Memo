@@ -1,3 +1,33 @@
+const request = require('supertest');
+const app = require('../app');
+const FlashCard = require('../models/FlashCard');
+
+describe('FlashCardController', () => {
+    describe('create', () => {
+        beforeEach(async () => {
+            await FlashCard.deleteMany({});
+        });
+        it('should create a flashcard', async () => {
+            const card = {
+                question: 'What is the capital of Brazil?',
+                response: 'Brasília',
+                subject: 'Geography'
+            };
+            const response = await request(app)
+                .post('/flashcard')
+                .send(card);
+            expect(response.status).toBe(201);
+            expect(response.body).toEqual({
+                message: 'FlashCard inserida no sistema com sucesso!'
+            });
+            const createdCard = await FlashCard.findOne({ question: card.question });
+            expect(createdCard).toMatchObject(card);
+        });
+    });
+});
+
+
+/**
 describe("POST /flashcard", () => {
   it("deve adicionar um flashcard com sucesso", async () => {
     // faça uma solicitação POST para a rota de flashcard
@@ -226,3 +256,4 @@ describe("PATCH /flashcard/:id", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
+ */
