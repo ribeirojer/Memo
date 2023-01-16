@@ -1,30 +1,14 @@
 // config inicial
 require("dotenv").config();
 const router = require("express").Router();
+import FlashCardController from '../controller/flashcard.controller';
 
 // depois do db
 const mongoose = require("mongoose");
 const FlashCard = require("../models/FlashCard");
 
 // rotas
-router.post("/flashcard", async (req, res) => {
-  const { question, response, subject } = req.body;
-
-  const card = {
-    question,
-    response,
-    subject,
-  };
-  try {
-    await FlashCard.create(card);
-
-    res
-      .status(201)
-      .json({ message: "FlashCard inserido no sistema com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ erro: error });
-  }
-});
+router.post("/flashcard", FlashCardController.create);
 
 router.get("/flashcard", async (req, res) => {
   try {
