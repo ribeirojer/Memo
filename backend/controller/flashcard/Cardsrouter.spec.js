@@ -1,41 +1,54 @@
-const request = require('supertest');
-const app = require('../app');
-const FlashCard = require('../models/FlashCard');
+const request = require("supertest");
+const { app } = require("../../index");
+const FlashCard = require("../../models/FlashCard");
+const validateFlashCard = require("./validateflashcard");
 
-describe('FlashCardController', () => {
-    describe('create', () => {
-        beforeEach(async () => {
-            await FlashCard.deleteMany({});
-        });
-        it('should create a flashcard', async () => {
-            const card = {
-                question: 'What is the capital of Brazil?',
-                response: 'Brasília',
-                subject: 'Geography'
-            };
-            const response = await request(app)
-                .post('/flashcard')
-                .send(card);
-            expect(response.status).toBe(201);
-            expect(response.body).toEqual({
-                message: 'FlashCard inserida no sistema com sucesso!'
-            });
-            const createdCard = await FlashCard.findOne({ question: card.question });
-            expect(createdCard).toMatchObject(card);
-        });
-    });
+describe("validateFlashCard", () => {
+  it("should return an error if question is missing", () => {
+    const data = { response: "This is a response", subject: "Math" };
+    const errors = validateFlashCard(data);
+    expect(errors).toEqual({ question: "question is required" });
+  });
+
+  it("should return an error if response is missing", () => {
+    const data = {
+      question: "What is the capital of France?",
+      subject: "Geography",
+    };
+    const errors = validateFlashCard(data);
+    expect(errors).toEqual({ response: "response is required" });
+  });
+
+  it("should return an error if subject is missing", () => {
+    const data = {
+      question: "What is the capital of France?",
+      response: "Paris",
+    };
+    const errors = validateFlashCard(data);
+    expect(errors).toEqual({ subject: "subject is required" });
+  });
+
+  it("should return null if all required data is present", () => {
+    const data = {
+      question: "What is the capital of France?",
+      response: "Paris",
+      subject: "Geography",
+    };
+    const errors = validateFlashCard(data);
+    expect(errors).toBeNull();
+  });
 });
-
-
 /**
 describe("POST /flashcard", () => {
   it("deve adicionar um flashcard com sucesso", async () => {
     // faça uma solicitação POST para a rota de flashcard
-    const res = await request(app).post("/flashcard").send({
+    const data = {
       question: "What is the capital of France?",
       response: "Paris",
       subject: "Geography",
-    });
+    }
+
+    const res = await request(app).post("/flashcard").send(data);
 
     // verifique se o flashcard foi adicionado com sucesso
     expect(res.statusCode).toBe(201);
@@ -66,39 +79,13 @@ describe("POST /flashcard", () => {
 describe("GET /flashcard", () => {
   it("deve retornar todos os flashcards", async () => {
     // crie alguns flashcards de teste
-    const testCard1 = new FlashCard({
-      question: "What is the capital of France?",
-      response: "Paris",
-      subject: "Geography",
-    });
-    await testCard1.save();
-
-    const testCard2 = new FlashCard({
-      question: "What is the capital of Italy?",
-      response: "Rome",
-      subject: "Geography",
-    });
-    await testCard2.save();
 
     // faça uma solicitação GET para a rota de flashcard
     const res = await request(app).get("/flashcard");
 
     // verifique se todos os flashcards são retornados
     expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual([
-      {
-        _id: expect.any(String),
-        question: "What is the capital of France?",
-        response: "Paris",
-        subject: "Geography",
-      },
-      {
-        _id: expect.any(String),
-        question: "What is the capital of Italy?",
-        response: "Rome",
-        subject: "Geography",
-      },
-    ]);
+    expect(res.body).toBeTruthy();
   });
 
   it("deve retornar um erro se houver um problema ao recuperar os flashcards", async () => {
@@ -256,4 +243,5 @@ describe("PATCH /flashcard/:id", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
+
  */

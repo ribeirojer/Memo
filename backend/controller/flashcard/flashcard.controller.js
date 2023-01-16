@@ -1,27 +1,8 @@
 const FlashCard = require("../../models/FlashCard");
-
-function validateFlashCard(data) {
-  const errors = {};
-
-  if (!data.question) {
-    errors.question = "question is required";
-  }
-  if (!data.response) {
-    errors.response = "response is required";
-  }
-  if (!data.subject) {
-    errors.subject = "subject is required";
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return errors;
-  }
-  return null;
-}
+const validateFlashCard = require("./validateflashcard");
 
 class FlashCardController {
   async create(req, res) {
-    
     // Validate data
     const errors = validateFlashCard(req.body);
     if (errors) {

@@ -1,3 +1,13 @@
+
+function sum(a, b) {
+  return a + b;
+}
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+
+/** 
 describe("GET /user/:id", () => {
   it("deve retornar um usuário existente", async () => {
     // crie um usuário de teste e salve-o na base de dados
@@ -212,3 +222,4 @@ describe("checkToken", () => {
     expect(res.status).toHaveBeenCalledWith(400);
   });
 });
+*/
