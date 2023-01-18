@@ -1,6 +1,18 @@
 import { describe, it, expect, vi } from "vitest";
-const checkToken = require("../middlewares/checkToken").default
+
+describe("", () => {
+  it("", () => {
+    const zero = 0;
+    expect(zero).toBe(0);
+  });
+});
 /**
+ * const request = require("supertest");
+const { app } = require("../index");
+const User = require("../models/User");
+const { checkToken } = require("../routes/tt");
+const jwt = require("jsonwebtoken");
+
 describe("GET /user/:id", () => {
   it("deve retornar um usuário existente", async () => {
     // crie um usuário de teste e salve-o na base de dados

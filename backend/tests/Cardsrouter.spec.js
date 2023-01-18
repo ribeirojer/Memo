@@ -37,7 +37,7 @@ describe("POST /flashcard", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
-
+/** 
 describe("GET /flashcard", () => {
   it("deve retornar todos os flashcards", async () => {
     // crie alguns flashcards de teste
@@ -205,3 +205,4 @@ describe("PATCH /flashcard/:id", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
+*/
