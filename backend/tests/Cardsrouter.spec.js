@@ -1,54 +1,16 @@
+import { describe, it, expect, vi } from "vitest";
 const request = require("supertest");
-const { app } = require("../../index");
-const FlashCard = require("../../models/FlashCard");
-const validateFlashCard = require("./validateflashcard");
+const { app } = require("../index");
+const FlashCard = require("../models/FlashCard");
 
-describe("validateFlashCard", () => {
-  it("should return an error if question is missing", () => {
-    const data = { response: "This is a response", subject: "Math" };
-    const errors = validateFlashCard(data);
-    expect(errors).toEqual({ question: "question is required" });
-  });
-
-  it("should return an error if response is missing", () => {
-    const data = {
-      question: "What is the capital of France?",
-      subject: "Geography",
-    };
-    const errors = validateFlashCard(data);
-    expect(errors).toEqual({ response: "response is required" });
-  });
-
-  it("should return an error if subject is missing", () => {
-    const data = {
-      question: "What is the capital of France?",
-      response: "Paris",
-    };
-    const errors = validateFlashCard(data);
-    expect(errors).toEqual({ subject: "subject is required" });
-  });
-
-  it("should return null if all required data is present", () => {
-    const data = {
-      question: "What is the capital of France?",
-      response: "Paris",
-      subject: "Geography",
-    };
-    const errors = validateFlashCard(data);
-    expect(errors).toBeNull();
-  });
-});
-/**
 describe("POST /flashcard", () => {
   it("deve adicionar um flashcard com sucesso", async () => {
     // faça uma solicitação POST para a rota de flashcard
-    const data = {
+    const res = await request(app).post("/flashcard").send({
       question: "What is the capital of France?",
       response: "Paris",
       subject: "Geography",
-    }
-
-    const res = await request(app).post("/flashcard").send(data);
+    });
 
     // verifique se o flashcard foi adicionado com sucesso
     expect(res.statusCode).toBe(201);
@@ -59,7 +21,7 @@ describe("POST /flashcard", () => {
 
   it("deve retornar um erro se houver um problema ao adicionar o flashcard", async () => {
     // sobrescreva o método de criação do modelo FlashCard para sempre lançar um erro
-    FlashCard.create = jest.fn(() => {
+    FlashCard.create = vi.fn(() => {
       throw new Error("Test error");
     });
 
@@ -243,5 +205,3 @@ describe("PATCH /flashcard/:id", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
-
- */

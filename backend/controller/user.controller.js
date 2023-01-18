@@ -1,5 +1,6 @@
-const User = require("../../models/User");
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 class UserController {
   async register(req, res) {
@@ -53,22 +54,22 @@ class UserController {
 
   async login (req, res) {
     const { email, password } = req.body;
-  
+    
     // validations
     if (!email) {
       return res.status(422).json({ msg: "O email é obrigatório!" });
-    }
-  
+    }    
     if (!password) {
       return res.status(422).json({ msg: "A senha é obrigatória!" });
     }
-  
+    
     // check if user exists
     const user = await User.findOne({ email: email });
-  
+    
     if (!user) {
       return res.status(404).json({ msg: "Usuário não encontrado!" });
     }
+    
     // check if password match
     const checkPassword = await bcrypt.compare(password, user.password);
   
@@ -94,14 +95,14 @@ class UserController {
 
   async privateRoute (req, res) {
     const id = req.params.id;
-    console.log(id);
+
     // check if user exists
     const user = await User.findById(id, "-password");
   
     if (!user) {
       return res.status(404).json({ msg: "Usuário não encontrado!" });
     }
-  
+
     res.status(200).json({ user });
   }
 }

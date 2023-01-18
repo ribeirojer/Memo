@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 // controller
-const FlashCardController = require("../controller/flashcard/flashcard.controller");
+const FlashCardController = require("../controller/flashcard.controller");
 
 // rotas
 router.post("/flashcard", FlashCardController.create);

@@ -1,10 +1,12 @@
 // config inicial
 const express = require("express");
 const router = express.Router();
+const { verify } = require("jsonwebtoken");
 
 // controller
-const userController = require("../controller/user/user.controller");
+const userController = require("../controller/user.controller");
 
+// middleware
 function checkToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -14,7 +16,7 @@ function checkToken(req, res, next) {
   try {
     const secret = process.env.SECRET;
 
-    jwt.verify(token, secret);
+    verify(token, secret);
 
     next();
   } catch (err) {
