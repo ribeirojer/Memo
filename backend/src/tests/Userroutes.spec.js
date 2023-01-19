@@ -1,18 +1,3 @@
-import { describe, it, expect, vi } from "vitest";
-
-describe("", () => {
-  it("", () => {
-    const zero = 0;
-    expect(zero).toBe(0);
-  });
-});
-/**
- * const request = require("supertest");
-const { app } = require("../index");
-const User = require("../models/User");
-const { checkToken } = require("../routes/tt");
-const jwt = require("jsonwebtoken");
-
 describe("GET /user/:id", () => {
   it("deve retornar um usuário existente", async () => {
     // crie um usuário de teste e salve-o na base de dados
@@ -201,7 +186,7 @@ describe("checkToken", () => {
     // crie uma solicitação de teste com o token de teste
     const req = { headers: { authorization: `Bearer ${testToken}` } };
     const res = {};
-    const next = vi.fn();
+    const next = jest.fn();
 
     // chame a função checkToken com a solicitação de teste, a resposta e o próximo middleware
     checkToken(req, res, next);
@@ -217,8 +202,8 @@ describe("checkToken", () => {
     // crie uma solicitação de teste com o token de teste
 
     const req = { headers: { authorization: `Bearer ${testToken}` } };
-    const res = { status: vi.fn(() => ({ json: vi.fn() })) };
-    const next = vi.fn();
+    const res = { status: jest.fn(() => ({ json: jest.fn() })) };
+    const next = jest.fn();
 
     // chame a função checkToken com a solicitação de teste, a resposta e o próximo middleware
     checkToken(req, res, next);
@@ -227,5 +212,3 @@ describe("checkToken", () => {
     expect(res.status).toHaveBeenCalledWith(400);
   });
 });
-
- */

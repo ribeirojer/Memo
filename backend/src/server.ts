@@ -1,26 +1,20 @@
-// config inicial
-require("dotenv").config();
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
+const app = express();
 
-// Solve CORS
-app.use(cors());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
+// Routes
+import UserRoutes from "./routes/UserRoutes";
+import CardRoutes from "./routes/CardRoutes";
 
 // Config JSON response
 app.use(express.json());
 
-const CardRoutes = require("./routes/CardRoutes");
-const UserRoutes = require("./routes/UserRoutes");
+// Solve CORS
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
-app.use("/", CardRoutes);
 app.use("/", UserRoutes);
+app.use("/", CardRoutes);
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -35,6 +29,4 @@ mongoose
       console.log("o servidor está funcionando...");
     });
   })
-  .catch((err) => console.log(err));
-
-module.exports = { app };
+  .catch((err: any) => console.log(err));

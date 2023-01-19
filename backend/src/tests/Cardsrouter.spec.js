@@ -1,8 +1,3 @@
-import { describe, it, expect, vi } from "vitest";
-const request = require("supertest");
-const { app } = require("../index");
-const FlashCard = require("../models/FlashCard");
-
 describe("POST /flashcard", () => {
   it("deve adicionar um flashcard com sucesso", async () => {
     // faça uma solicitação POST para a rota de flashcard
@@ -21,7 +16,7 @@ describe("POST /flashcard", () => {
 
   it("deve retornar um erro se houver um problema ao adicionar o flashcard", async () => {
     // sobrescreva o método de criação do modelo FlashCard para sempre lançar um erro
-    FlashCard.create = vi.fn(() => {
+    FlashCard.create = jest.fn(() => {
       throw new Error("Test error");
     });
 
@@ -37,17 +32,43 @@ describe("POST /flashcard", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
-/** 
+
 describe("GET /flashcard", () => {
   it("deve retornar todos os flashcards", async () => {
     // crie alguns flashcards de teste
+    const testCard1 = new FlashCard({
+      question: "What is the capital of France?",
+      response: "Paris",
+      subject: "Geography",
+    });
+    await testCard1.save();
+
+    const testCard2 = new FlashCard({
+      question: "What is the capital of Italy?",
+      response: "Rome",
+      subject: "Geography",
+    });
+    await testCard2.save();
 
     // faça uma solicitação GET para a rota de flashcard
     const res = await request(app).get("/flashcard");
 
     // verifique se todos os flashcards são retornados
     expect(res.statusCode).toBe(200);
-    expect(res.body).toBeTruthy();
+    expect(res.body).toEqual([
+      {
+        _id: expect.any(String),
+        question: "What is the capital of France?",
+        response: "Paris",
+        subject: "Geography",
+      },
+      {
+        _id: expect.any(String),
+        question: "What is the capital of Italy?",
+        response: "Rome",
+        subject: "Geography",
+      },
+    ]);
   });
 
   it("deve retornar um erro se houver um problema ao recuperar os flashcards", async () => {
@@ -205,4 +226,3 @@ describe("PATCH /flashcard/:id", () => {
     expect(res.body).toEqual({ erro: "Test error" });
   });
 });
-*/

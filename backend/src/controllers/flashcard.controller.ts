@@ -1,26 +1,26 @@
-const FlashCard = require("../models/FlashCard");
+const FlashCardModel = require("../models/FlashCard");
 
 function validateFlashCard({ question, response, subject }) {
-  const errors = {};
+  let errors = {};
 
   if (!question) {
-    errors.question = "question is required";
+    errors = "question is required";
   }
   if (!response) {
-    errors.response = "response is required";
+    errors = "response is required";
   }
   if (!subject) {
-    errors.subject = "subject is required";
+    errors = "subject is required";
   }
 
   if (Object.keys(errors).length > 0) {
     return errors;
   }
   return null;
-};
+}
 
-class FlashCardController {
-  async create(req, res) {
+export class FlashCardController {
+  static async create(req, res): Promise<void> {
     // Validate data
     const errors = validateFlashCard(req.body);
     if (errors) {
@@ -37,7 +37,7 @@ class FlashCardController {
     };
 
     try {
-      await FlashCard.create(card);
+      await FlashCardModel.create(card);
       res
         .status(201)
         .json({ message: "FlashCard inserida no sistema com sucesso!" });
@@ -46,19 +46,19 @@ class FlashCardController {
     }
   }
 
-  async getAll(req, res) {
+  static async getAll(req, res): Promise<void> {
     try {
-      const cards = await FlashCard.find();
+      const cards = await FlashCardModel.find();
       res.status(200).json(cards);
     } catch (error) {
       res.status(500).json({ erro: error });
     }
   }
 
-  async getOne(req, res) {
+  static async getOne(req, res): Promise<void> {
     const id = req.params.id;
     try {
-      const card = await FlashCard.findOne({ _id: id });
+      const card = await FlashCardModel.findOne({ _id: id });
       if (!card) {
         res.status(422).json({ message: "FlashCard não encontrado!" });
         return;
@@ -69,7 +69,7 @@ class FlashCardController {
     }
   }
 
-  async update(req, res) {
+  static async update(req, res): Promise<void> {
     const id = req.params.id;
 
     // Validate data
@@ -88,7 +88,7 @@ class FlashCardController {
     };
 
     try {
-      const updatedCard = await FlashCard.updateOne({ _id: id }, card);
+      const updatedCard = await FlashCardModel.updateOne({ _id: id }, card);
       if (updatedCard.matchedCount === 0) {
         res.status(422).json({ message: "FlashCard não encontrado!" });
         return;
@@ -99,10 +99,10 @@ class FlashCardController {
     }
   }
 
-  async delete(req, res) {
+  static async delete(req, res): Promise<void> {
     const id = req.params.id;
 
-    const card = await FlashCard.findOne({ _id: id });
+    const card = await FlashCardModel.findOne({ _id: id });
 
     if (!card) {
       res.status(422).json({ message: "FlashCard não encontrado!" });
@@ -110,7 +110,7 @@ class FlashCardController {
     }
 
     try {
-      await FlashCard.deleteOne({ _id: id });
+      await FlashCardModel.deleteOne({ _id: id });
 
       res.status(200).json({ message: "FlashCard removido com sucesso!" });
     } catch (error) {
@@ -118,5 +118,3 @@ class FlashCardController {
     }
   }
 }
-
-module.exports = new FlashCardController();

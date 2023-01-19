@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoosee = require('mongoose')
 
-const FlashCard = mongoose.model("FlashCard", {
+const FlashCard = mongoosee.model("FlashCard", {
   question: String,
   response: String,
   subject: Number,
