@@ -1,33 +1,10 @@
 import axios from "axios";
 import { useState, useEffect, SetStateAction } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Content from "../components/Content";
+import { useNavigate } from "react-router-dom";
+import Content from "../../components/Content";
+import { Wrapper } from "./Dashboard";
 
 type Props = {};
-
-const Wrapper = styled.header`
-  display: flex;
-  padding: 0 2rem;
-  gap: 2rem;
-  .card {
-    background-color: #1a3753;
-    width: 33vw;
-  }
-  .content {
-    width: 66vw;
-    background-color: #1a3753;
-    padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  .content img {
-    width: 180px;
-    height: 150px;
-  }
-`;
 
 const DashBoard = (props: Props) => {
   const [user, setUser] = useState<any>({});

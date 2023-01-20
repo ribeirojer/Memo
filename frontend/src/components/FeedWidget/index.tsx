@@ -1,13 +1,13 @@
-import React from 'react'
+import { Wrapper } from "./FeedWidget";
 
 type Props = {}
 
 const FeedWidget = (props: Props) => {
   return (
-    <div>
+    <Wrapper>
         <h1>Dê seu feedback</h1>
         <p>digite aqui</p>
-    </div>
+    </Wrapper>
   )
 }
 
