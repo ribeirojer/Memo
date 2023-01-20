@@ -9,7 +9,6 @@ export const Wrapper = styled.main`
     display: flex;
     width: 24rem;
     flex-direction: column;
-    gap: 1rem;
     margin: 0 0 2rem 0;
   }
   .google {

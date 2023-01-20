@@ -2,6 +2,9 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Wrapper } from "./Register";
+import Input from "../../components/Input";
+import { Dog } from "phosphor-react";
+import Button from "../../components/Button";
 
 type Props = {};
 
@@ -10,7 +13,7 @@ const Register = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { register, loading } = useAuth();
+  const { register, loading, authenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -24,38 +27,53 @@ const Register = (props: Props) => {
     };
 
     register(user);
-    navigate("/dashboard");
+    if (authenticated) {
+      navigate("/dashboard");
+    }
   };
 
   return (
     <Wrapper id="register">
+      <Dog size={54} color={"#ffa500"} />
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          onChange={(e) => setName(e.target.value)}
+        <Input
+          type={"text"}
+          text={"Nome"}
+          placeholder={"Digite seu nome"}
+          handleOnChange={(e: any) => setName(e.target.value)}
           value={name}
         />
-        <input
-          type="email"
-          placeholder="E-mail"
-          onChange={(e) => setEmail(e.target.value)}
+        <Input
+          type={"email"}
+          text={"E-mail"}
+          placeholder={"Digite seu e-mail"}
+          handleOnChange={(e: any) => setEmail(e.target.value)}
           value={email}
         />
-        <input
-          type="password"
-          placeholder="Senha"
-          onChange={(e) => setPassword(e.target.value)}
+        <Input
+          type={"password"}
+          text={"Senha"}
+          placeholder={"Digite sua senha"}
+          handleOnChange={(e: any) => setPassword(e.target.value)}
           value={password}
         />
-        <input
-          type="password"
-          placeholder="Confirme a senha"
-          onChange={(e) => setConfirmPassword(e.target.value)}
+        <Input
+          type={"password"}
+          text={"Confirmação de senha"}
+          placeholder={"Digite novamente sua senha"}
+          handleOnChange={(e: any) => setConfirmPassword(e.target.value)}
           value={confirmPassword}
         />
-        {!loading && <input type="submit" value="Cadastrar" />}
-        {loading && <input type="submit" disabled value="Aguarde..." />}
+        {!loading && (
+          <Button color={"#ffa500"} theme={"#12263a"}>
+            Cadastrar
+          </Button>
+        )}
+        {loading && (
+          <Button disabled color={"#ffa500"} theme={"#12263a"}>
+            Aguarde...
+          </Button>
+        )}
         {/*error && <Message msg={error} type="error" />*/}
       </form>
       <p>

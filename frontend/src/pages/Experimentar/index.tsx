@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Data from "../../assets/ap.json";
-import DogImage from "../assets/undraw_dog_re_7980.svg";
+import DogImage from "../../assets/undraw_dog_re_7980.svg";
 import Button from "../../components/Button";
 import { Wrapper } from "./Experimentar";
 

@@ -5,6 +5,7 @@ type Props = {
   color: string;
   theme: string;
   children: ReactNode;
+  disabled?: boolean;
 };
 
 const Button = ({ color, theme, children }: Props) => {
