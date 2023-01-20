@@ -1,33 +1,7 @@
 const FlashCardModel = require("../models/FlashCard");
 
-function validateFlashCard({ question, response, subject }) {
-  let errors = {};
-
-  if (!question) {
-    errors = "question is required";
-  }
-  if (!response) {
-    errors = "response is required";
-  }
-  if (!subject) {
-    errors = "subject is required";
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return errors;
-  }
-  return null;
-}
-
 export class FlashCardController {
   static async create(req, res): Promise<void> {
-    // Validate data
-    const errors = validateFlashCard(req.body);
-    if (errors) {
-      res.status(400).json({ errors });
-      return;
-    }
-
     const { question, response, subject } = req.body;
 
     const card = {
@@ -71,13 +45,6 @@ export class FlashCardController {
 
   static async update(req, res): Promise<void> {
     const id = req.params.id;
-
-    // Validate data
-    const errors = validateFlashCard(req.body);
-    if (errors) {
-      res.status(400).json({ errors });
-      return;
-    }
 
     const { question, response, subject } = req.body;
 
