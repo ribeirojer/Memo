@@ -1,8 +1,10 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
+const xss = require("xss-clean");
 
 const app = express();
+app.use(xss());
 app.use(helmet());
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
