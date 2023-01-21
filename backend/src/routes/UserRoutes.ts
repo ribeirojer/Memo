@@ -22,5 +22,7 @@ router.post(
   UserController.forgotPassword
 );
 router.post("reset-password/${token}", UserController.resetPassword);
+router.post("/auth/reactivateAccount", checkToken, UserController.reactivateAccount);
+router.post("/auth/deactivateAccount", checkToken, UserController.deactivateAccount);
 
 export default router;

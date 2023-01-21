@@ -1,16 +1,20 @@
 const UserModel = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+import { logger } from "app";
 import { sendEmail } from "../utils/sendEmail";
 
 export class UserController {
   static async register(req, res): Promise<any> {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password } = req.body;
 
     // check if user exists
     const userExists = await UserModel.findOne({ email: email });
 
     if (userExists) {
+      logger.warn("User register failed", {
+        error: "User register failed",
+      });
       return res.status(422).json({ msg: "Por favor, utilize outro e-mail!" });
     }
 
@@ -29,8 +33,10 @@ export class UserController {
       await user.save();
 
       res.status(201).json({ msg: "Usuário criado com sucesso!" });
+      logger.info("User login success", { email: req.body.email });
     } catch (error) {
       res.status(500).json({ msg: error });
+      logger.error("An error occurred", { error: "An error occurred" });
     }
   }
 
@@ -46,13 +52,19 @@ export class UserController {
     // check if password match
     const checkPassword = await bcrypt.compare(password, user.password);
 
-    if (!checkPassword) {
-      return res.status(422).json({ msg: "Senha inválida" });
+    if (checkPassword) {
+      logger.info("User login success", { email: req.body.email });
+      res.status(200).json({ msg: "Autenticação realizada com sucesso!" });
+    } else {
+      logger.warn("User login failed", { email: req.body.email });
+      res.status(422).json({ msg: "Senha inválida" });
     }
 
     // check if account is active
     if (!user.isActive) {
-      return res.status(401).json({ msg: 'Esta conta está desativada, por favor reative' });
+      return res
+        .status(401)
+        .json({ msg: "Esta conta está desativada, por favor reative" });
     }
 
     try {
@@ -68,8 +80,11 @@ export class UserController {
       res
         .status(200)
         .json({ msg: "Autenticação realizada com sucesso!", token });
+
+      logger.info("User login success", { email: req.body.email });
     } catch (error) {
       res.status(500).json({ msg: error });
+      logger.error("An error occurred", { error: "An error occurred" });
     }
   }
 

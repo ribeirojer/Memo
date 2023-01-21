@@ -1,27 +1,10 @@
-const express = require("express");
-const helmet = require("helmet");
-const cors = require("cors");
-const mongoose = require('mongoose')
-const app = express();
-app.use(helmet());
-
-// Routes
-import UserRoutes from "./routes/UserRoutes";
-import CardRoutes from "./routes/CardRoutes";
-
-// Config JSON response
-app.use(express.json());
-
-// Solve CORS
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-
-app.use("/", UserRoutes);
-app.use("/", CardRoutes);
+const { app } = require("./app");
+const mongooses = require("mongoose");
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 
-mongoose
+mongooses
   .connect(
     `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.cdyo6kz.mongodb.net/banco1?retryWrites=true&w=majority`
   )
