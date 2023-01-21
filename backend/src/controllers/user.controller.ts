@@ -50,6 +50,11 @@ export class UserController {
       return res.status(422).json({ msg: "Senha inválida" });
     }
 
+    // check if account is active
+    if (!user.isActive) {
+      return res.status(401).json({ msg: 'Esta conta está desativada, por favor reative' });
+    }
+
     try {
       const secret = process.env.SECRET;
 
@@ -141,6 +146,36 @@ export class UserController {
       user.password = passwordHash;
       await user.save();
       res.status(200).json({ msg: "Senha redefinida com sucesso!" });
+    } catch (error) {
+      res.status(500).json({ msg: error });
+    }
+  }
+
+  static async deactivateAccount(req, res): Promise<any> {
+    const userId = req.params.id;
+    try {
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(404).json({ msg: "Usuário não encontrado!" });
+      }
+      user.isActive = false;
+      await user.save();
+      res.status(200).json({ msg: "Conta desativada com sucesso!" });
+    } catch (error) {
+      res.status(500).json({ msg: error });
+    }
+  }
+
+  static async reactivateAccount(req, res): Promise<any> {
+    const userId = req.params.id;
+    try {
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(404).json({ msg: "Usuário não encontrado!" });
+      }
+      user.isActive = true;
+      await user.save();
+      res.status(200).json({ msg: "Conta reativada com sucesso!" });
     } catch (error) {
       res.status(500).json({ msg: error });
     }

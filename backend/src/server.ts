@@ -1,7 +1,9 @@
 const express = require("express");
+const helmet = require("helmet");
 const cors = require("cors");
 const mongoose = require('mongoose')
 const app = express();
+app.use(helmet());
 
 // Routes
 import UserRoutes from "./routes/UserRoutes";
