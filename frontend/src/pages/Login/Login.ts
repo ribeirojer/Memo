@@ -25,4 +25,7 @@ export const Wrapper = styled.main`
     border: 1px solid #ffa500;
     color: #1a1f36;
   }
+  button {
+    margin-top: 1rem;
+  }
 `;

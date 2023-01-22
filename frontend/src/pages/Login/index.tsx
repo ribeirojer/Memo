@@ -14,19 +14,15 @@ const Login = (props: Props) => {
   const [userFirebase, setUserFirebase] = useState<User>({} as User);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { authenticated, login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
-    const user = {
-      email,
-      password,
-    };
-
-    login(user);
-    navigate("/dashboard");
+    login({ email, password });
+    if (authenticated) {
+      navigate("/dashboard");
+    }
   };
 
   function handleGoogleSignin() {
