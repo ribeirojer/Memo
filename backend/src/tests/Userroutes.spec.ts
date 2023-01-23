@@ -1,3 +1,6 @@
+const { describe, it, expect, vi } = require("vitest")
+const { request } = require("supertest")
+
 describe("GET /user/:id", () => {
   it("deve retornar um usuário existente", async () => {
     // crie um usuário de teste e salve-o na base de dados
@@ -186,7 +189,7 @@ describe("checkToken", () => {
     // crie uma solicitação de teste com o token de teste
     const req = { headers: { authorization: `Bearer ${testToken}` } };
     const res = {};
-    const next = jest.fn();
+    const next = vi.fn();
 
     // chame a função checkToken com a solicitação de teste, a resposta e o próximo middleware
     checkToken(req, res, next);
@@ -202,8 +205,8 @@ describe("checkToken", () => {
     // crie uma solicitação de teste com o token de teste
 
     const req = { headers: { authorization: `Bearer ${testToken}` } };
-    const res = { status: jest.fn(() => ({ json: jest.fn() })) };
-    const next = jest.fn();
+    const res = { status: vi.fn(() => ({ json: vi.fn() })) };
+    const next = vi.fn();
 
     // chame a função checkToken com a solicitação de teste, a resposta e o próximo middleware
     checkToken(req, res, next);

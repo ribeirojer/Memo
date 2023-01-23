@@ -1,3 +1,7 @@
+const { describe, it, expect, vi } = require("vitest")
+const { request } = require("supertest")
+
+
 describe("POST /flashcard", () => {
   it("deve adicionar um flashcard com sucesso", async () => {
     // faça uma solicitação POST para a rota de flashcard
@@ -16,7 +20,7 @@ describe("POST /flashcard", () => {
 
   it("deve retornar um erro se houver um problema ao adicionar o flashcard", async () => {
     // sobrescreva o método de criação do modelo FlashCard para sempre lançar um erro
-    FlashCard.create = jest.fn(() => {
+    FlashCard.create = vi.fn(() => {
       throw new Error("Test error");
     });
 
@@ -73,7 +77,7 @@ describe("GET /flashcard", () => {
 
   it("deve retornar um erro se houver um problema ao recuperar os flashcards", async () => {
     // sobrescreva o método de busca do modelo FlashCard para sempre lançar um erro
-    FlashCard.find = jest.fn(() => {
+    FlashCard.find = vi.fn(() => {
       throw new Error("Test error");
     });
 
@@ -120,7 +124,7 @@ describe("GET /flashcard/:id", () => {
 
   it("deve retornar um erro se houver um problema ao recuperar o flashcard", async () => {
     // sobrescreva o método de busca do modelo FlashCard para sempre lançar um erro
-    FlashCard.findOne = jest.fn(() => {
+    FlashCard.findOne = vi.fn(() => {
       throw new Error("Test error");
     });
 
@@ -162,7 +166,7 @@ describe("DELETE /flashcard/:id", () => {
 
   it("deve retornar um erro se houver um problema ao excluir o flashcard", async () => {
     // sobrescreva o método de exclusão do modelo FlashCard para sempre lançar um erro
-    FlashCard.deleteOne = jest.fn(() => {
+    FlashCard.deleteOne = vi.fn(() => {
       throw new Error("Test error");
     });
 
@@ -212,7 +216,7 @@ describe("PATCH /flashcard/:id", () => {
 
   it("deve retornar um erro se houver um problema ao atualizar o flashcard", async () => {
     // sobrescreva o método de atualização do modelo FlashCard para sempre lançar um erro
-    FlashCard.updateOne = jest.fn(() => {
+    FlashCard.updateOne = vi.fn(() => {
       throw new Error("Test error");
     });
 
