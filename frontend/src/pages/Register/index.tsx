@@ -1,9 +1,9 @@
-import useAuth from "../../hooks/useAuth";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Wrapper } from "./Register";
-import Input from "../../components/Input";
 import { Dog } from "phosphor-react";
+import { AuthContext } from "../../context/create";
+import Input from "../../components/Input";
 import Button from "../../components/Button";
 
 type Props = {};
@@ -13,8 +13,7 @@ const Register = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { register, loading, authenticated } = useAuth();
-  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -26,9 +25,9 @@ const Register = (props: Props) => {
       confirmPassword,
     };
 
-    register(user);
-    if (authenticated) {
-      navigate("/dashboard");
+    auth.register(user);
+    if (auth.authenticated) {
+      //navigate("/dashboard");
     }
   };
 
@@ -64,12 +63,12 @@ const Register = (props: Props) => {
           handleOnChange={(e: any) => setConfirmPassword(e.target.value)}
           value={confirmPassword}
         />
-        {!loading && (
+        {!auth.isLoading && (
           <Button color={"#ffa500"} theme={"#12263a"}>
             Cadastrar
           </Button>
         )}
-        {loading && (
+        {auth.isLoading && (
           <Button disabled color={"#ffa500"} theme={"#12263a"}>
             Aguarde...
           </Button>

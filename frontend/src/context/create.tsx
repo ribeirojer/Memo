@@ -2,9 +2,11 @@ import { createContext } from "react";
 import { IUser } from "../interfaces/User";
 
 export type AuthContextData = {
-  signed: boolean;
+  authenticated: boolean;
+  isLoading: boolean;
   user: IUser | null;
   signIn: (user: IUser) => Promise<void>;
+  register: (user: IUser) => Promise<void>;
   signOut: () => void;
 }
 

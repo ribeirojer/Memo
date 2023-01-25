@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { IUser } from "../interfaces/User";
 import api from "../services/api";
 import { AuthContext } from "./create";
@@ -9,15 +9,26 @@ type Props = {
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<IUser | null>(null);
-  const [signed, setsigned] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+      setAuthenticated(true);
+    }
+
+    setIsLoading(false);
+  }, []);
+  
   const register = async (user: IUser) => {
     setIsLoading(true);
     try {
       // chamada a api para registrar o usuário
-      const response = await api.post("/users", user);
+      const response = await api.post("/auth/register", user);
       setUser(response.data);
     } catch (error: any) {
       setIsError(error);
@@ -40,14 +51,23 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const signOut = () => {
-    setUser(null);
+    setUser(null);    
+    setAuthenticated(false);
+    localStorage.removeItem("token");
   };
+
+  async function authUser(data: any) {
+    setAuthenticated(true);
+    localStorage.setItem("token", JSON.stringify(data.token));
+  }
 
   return (
     <AuthContext.Provider
       value={{
-        signed,
+        isLoading,
+        authenticated,
         user,
+        register,
         signIn,
         signOut,
       }}
