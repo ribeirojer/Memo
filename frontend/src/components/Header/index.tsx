@@ -1,18 +1,17 @@
-import { Dog } from "phosphor-react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Dog, UserCircle } from "phosphor-react";
+import { Link, NavLink } from "react-router-dom";
 import { Wrapper } from "./Header";
 import Button from "../Button";
+import { useContext } from "react";
+import { AuthContext } from "../../context/create";
 
 type Props = {};
 
 const Header = (props: Props) => {
-  const auth = "";
-  const user = "";
-
-  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const handleLogout = () => {
-    navigate("/login");
+    auth.signOut;
   };
 
   return (
@@ -24,20 +23,12 @@ const Header = (props: Props) => {
 
       <nav id="nav" className="loginWrapper">
         <ul id="nav-links">
-          {auth ? (
+          {auth.user ? (
             <>
               <li>
-                <NavLink to="/">{/*<BsHouseDoorFill />*/}</NavLink>
-              </li>
-              {user && (
-                <li>
-                  <NavLink to={`/users/${user}`}>
-                    {/*<BsFillCameraFill />*/}
-                  </NavLink>
-                </li>
-              )}
-              <li>
-                <NavLink to="/profile">{/*<BsFillPersonFill />*/}</NavLink>
+                <NavLink to="/profile">
+                  <UserCircle />
+                </NavLink>
               </li>
               <li>
                 <span onClick={handleLogout}>Sair</span>
@@ -64,17 +55,10 @@ const Header = (props: Props) => {
         </ul>
       </nav>
       <div className="burguer">
-        <span>hhh</span>
+        <span>Menu</span>
       </div>
     </Wrapper>
   );
 };
 
 export default Header;
-function useAuth(): { auth: any } {
-  throw new Error("Function not implemented.");
-}
-
-function useSelector(arg0: (state: any) => any): { user: any } {
-  throw new Error("Function not implemented.");
-}

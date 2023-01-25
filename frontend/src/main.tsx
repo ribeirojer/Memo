@@ -1,21 +1,23 @@
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import App from './App'
-import './index.css'
-import DashBoard from './pages/Dashboard'
-import Exercices from './pages/Exercices'
-import Experimentar from './pages/Experimentar'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import NotFound from './pages/NotFound'
-import Register from './pages/Register'
-import SendCard from './pages/SendCard'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import App from "./App";
+import { AuthProvider } from "./context/auth-context";
+import "./index.css";
+import DashBoard from "./pages/Dashboard";
+import Exercices from "./pages/Exercices";
+import Experimentar from "./pages/Experimentar";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Register from "./pages/Register";
+import SendCard from "./pages/SendCard";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   //<React.StrictMode>
+  <AuthProvider>
     <BrowserRouter>
       <Routes>
-        <Route element={<App />}>        
+        <Route element={<App />}>
           <Route path="/" element={<Home />} />
           <Route path="experimentar" element={<Experimentar />} />
           <Route path="login" element={<Login />} />
@@ -27,5 +29,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </Route>
       </Routes>
     </BrowserRouter>
+  </AuthProvider>
   //</React.StrictMode>
-)
+);

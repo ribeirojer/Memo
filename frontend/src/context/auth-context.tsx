@@ -1,14 +1,15 @@
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useState } from "react";
 import { IUser } from "../interfaces/User";
 import api from "../services/api";
-import AuthContext from "./create";
+import { AuthContext } from "./create";
 
 type Props = {
   children: ReactNode;
 };
 
 export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [signed, setsigned] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-  const login = async (user: IUser) => {
+  const signIn = async (user: IUser) => {
     setIsLoading(true);
     try {
       // chamada a api para logar o usuário
@@ -38,17 +39,20 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-  const logout = () => {
+  const signOut = () => {
     setUser(null);
   };
 
   return (
-    <AuthContext></AuthContext>
-      value={{ user, isLoading, isError, register, login, logout }}
+    <AuthContext.Provider
+      value={{
+        signed,
+        user,
+        signIn,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);
