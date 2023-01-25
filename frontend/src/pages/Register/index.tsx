@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Wrapper } from "./Register";
 import { Dog } from "phosphor-react";
-import { AuthContext } from "../../context/create";
+import { AuthContext } from "../../context/AuthContext";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
@@ -14,6 +14,7 @@ const Register = (props: Props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -25,9 +26,10 @@ const Register = (props: Props) => {
       confirmPassword,
     };
 
-    auth.register(user);
-    if (auth.authenticated) {
-      //navigate("/dashboard");
+    await auth.register(user);
+    
+    if (auth.authenticated && auth.isLoading) {
+      navigate("/dashboard");
     }
   };
 

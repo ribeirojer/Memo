@@ -54,7 +54,7 @@ export class UserController {
 
     if (checkPassword) {
       logger.info("User login success", { email: req.body.email });
-      res.status(200).json({ msg: "Autenticação realizada com sucesso!" });
+      res.status(200).json({ name: user.name, id: user._id });
     } else {
       logger.warn("User login failed", { email: req.body.email });
       res.status(422).json({ msg: "Senha inválida" });

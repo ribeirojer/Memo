@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Wrapper } from "./Header";
 import Button from "../Button";
 import { useContext } from "react";
-import { AuthContext } from "../../context/create";
+import { AuthContext } from "../../context/AuthContext";
 
 type Props = {};
 
@@ -11,7 +11,7 @@ const Header = (props: Props) => {
   const auth = useContext(AuthContext);
 
   const handleLogout = () => {
-    auth.signOut;
+    auth.signOut();
   };
 
   return (
@@ -26,7 +26,8 @@ const Header = (props: Props) => {
           {auth.user ? (
             <>
               <li>
-                <NavLink to="/profile">
+                <NavLink to="/dashboard">
+                  {auth.user.name}
                   <UserCircle />
                 </NavLink>
               </li>

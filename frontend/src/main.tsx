@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./context/AuthProvider";
+import { RequireAuth } from "./context/RequireAuth";
 import "./index.css";
 import DashBoard from "./pages/Dashboard";
 import Exercices from "./pages/Exercices";
@@ -14,21 +15,28 @@ import SendCard from "./pages/SendCard";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   //<React.StrictMode>
-  <AuthProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route element={<App />}>
           <Route path="/" element={<Home />} />
           <Route path="experimentar" element={<Experimentar />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="dashboard" element={<DashBoard />} />
+          <Route
+            path="dashboard"
+            element={
+              <RequireAuth>
+                <DashBoard />
+              </RequireAuth>
+            }
+          />
           <Route path="exercises/:subject" element={<Exercices />} />
           <Route path="cards" element={<SendCard />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </BrowserRouter>
-  </AuthProvider>
+    </AuthProvider>
+  </BrowserRouter>
   //</React.StrictMode>
 );

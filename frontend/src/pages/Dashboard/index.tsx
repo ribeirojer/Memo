@@ -1,34 +1,16 @@
-import axios from "axios";
-import { useState, useEffect, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
-import Content from "../../components/Content";
+import { useState } from "react";
 import { Wrapper } from "./Dashboard";
-import imageLinks from "../../assets/images.json"
+import { IUser } from "../../interfaces/User";
+import Content from "../../components/Content";
+import imageLinks from "../../assets/images.json";
 
 type Props = {};
 
 const DashBoard = (props: Props) => {
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<IUser>();
   const [token] = useState(localStorage.getItem("token") || "");
-  const navigate = useNavigate();
 
   const subjects = imageLinks;
-
-  useEffect(() => {
-    axios
-      .get("/users/checkuser", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
-        },
-      })
-      .then((response: { data: SetStateAction<{}> }) => {
-        setUser(response.data);
-      });
-  }, [token]);
-
-  function handleNavigate(id: number) {
-    navigate(`/exercises/${id}`);
-  }
 
   return (
     <Wrapper>
@@ -40,7 +22,7 @@ const DashBoard = (props: Props) => {
         {subjects &&
           subjects.map((item) => {
             return (
-              <span onClick={() => handleNavigate(item.id)} key={item.id}>
+              <span onClick={() => {}} key={item.id}>
                 <Content link={item.link} name={item.name} />
               </span>
             );

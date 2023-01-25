@@ -7,7 +7,7 @@ const app = express();
 app.use(xss());
 app.use(helmet());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors());
 
 // Import routes
 import UserRoutes from "./routes/UserRoutes";

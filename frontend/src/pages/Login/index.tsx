@@ -3,9 +3,10 @@ import { Dog, GoogleLogo } from "phosphor-react";
 import { useContext, useState } from "react";
 import { Wrapper } from "./Login";
 import { auth } from "../../services/firebase";
-import { AuthContext } from "../../context/create";
+import { AuthContext } from "../../context/AuthContext";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -14,12 +15,14 @@ const Login = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const authen = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     authen.signIn({ email, password });
-    if (authen.authenticated) {
-      //navigate("/dashboard");
+    
+    if (authen.authenticated && authen.isLoading) {
+      navigate("/dashboard");
     }
   };
 
