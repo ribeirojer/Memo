@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Wrapper } from "./Register";
 import { Dog } from "phosphor-react";
@@ -16,6 +16,12 @@ const Register = (props: Props) => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (auth.authenticated) {
+      navigate("/login");
+    }
+  }, [auth]);
+  
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -26,10 +32,13 @@ const Register = (props: Props) => {
       confirmPassword,
     };
 
-    await auth.register(user);
-    
-    if (auth.user?.name) {
-      navigate("/dashboard");
+    try {
+      await auth.register(user);
+      if (auth.user?.name) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

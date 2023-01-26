@@ -26,13 +26,14 @@ const Header = (props: Props) => {
           {auth.user ? (
             <>
               <li>
-                <NavLink to="/dashboard">
-                  {auth.user.name}
-                  <UserCircle />
-                </NavLink>
+                <NavLink to="/dashboard">{auth.user.name}</NavLink>
               </li>
-              <li>
-                <span onClick={handleLogout}>Sair</span>
+              <li className="icon">
+                <UserCircle size={48} />
+                <div className="options">
+                  <span>Configurações</span>
+                  <span onClick={handleLogout}>Sair</span>
+                </div>
               </li>
             </>
           ) : (
