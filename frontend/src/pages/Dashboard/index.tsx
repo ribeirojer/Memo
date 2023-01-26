@@ -1,21 +1,19 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Wrapper } from "./Dashboard";
-import { IUser } from "../../interfaces/User";
 import Content from "../../components/Content";
 import imageLinks from "../../assets/images.json";
+import { AuthContext } from "../../context/AuthContext";
 
 type Props = {};
 
 const DashBoard = (props: Props) => {
-  const [user, setUser] = useState<IUser>();
-  const [token] = useState(localStorage.getItem("token") || "");
-
+  const auth = useContext(AuthContext);
   const subjects = imageLinks;
 
   return (
     <Wrapper>
       <div className="card">
-        <p>informações</p>
+        <p>informações de {auth.user?.name}</p>
         <p>graficos</p>
       </div>
       <div className="content">

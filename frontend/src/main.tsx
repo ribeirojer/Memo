@@ -31,7 +31,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               </RequireAuth>
             }
           />
-          <Route path="exercises/:subject" element={<Exercices />} />
+          <Route
+            path="exercises/:subject"
+            element={
+              <RequireAuth>
+                <Exercices />
+              </RequireAuth>
+            }
+          />
           <Route path="cards" element={<SendCard />} />
           <Route path="*" element={<NotFound />} />
         </Route>

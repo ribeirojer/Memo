@@ -28,7 +28,7 @@ const Register = (props: Props) => {
 
     await auth.register(user);
     
-    if (auth.authenticated && auth.isLoading) {
+    if (auth.user?.name) {
       navigate("/dashboard");
     }
   };

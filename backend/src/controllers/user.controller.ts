@@ -32,11 +32,11 @@ export class UserController {
     try {
       await user.save();
 
-      res.status(201).json({ msg: "Usuário criado com sucesso!" });
       logger.info("User login success", { email: req.body.email });
+      res.status(201).json({ msg: "Usuário criado com sucesso!" });
     } catch (error) {
-      res.status(500).json({ msg: error });
       logger.error("An error occurred", { error: "An error occurred" });
+      res.status(500).json({ msg: error });
     }
   }
 
@@ -52,10 +52,7 @@ export class UserController {
     // check if password match
     const checkPassword = await bcrypt.compare(password, user.password);
 
-    if (checkPassword) {
-      logger.info("User login success", { email: req.body.email });
-      res.status(200).json({ name: user.name, id: user._id });
-    } else {
+    if (!checkPassword) {
       logger.warn("User login failed", { email: req.body.email });
       res.status(422).json({ msg: "Senha inválida" });
     }
@@ -77,14 +74,11 @@ export class UserController {
         secret
       );
 
-      res
-        .status(200)
-        .json({ msg: "Autenticação realizada com sucesso!", token });
-
       logger.info("User login success", { email: req.body.email });
+      res.status(200).json({ name: user.name, token });
     } catch (error) {
-      res.status(500).json({ msg: error });
       logger.error("An error occurred", { error: "An error occurred" });
+      res.status(500).json({ msg: error });
     }
   }
 
