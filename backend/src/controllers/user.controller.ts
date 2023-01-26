@@ -33,7 +33,7 @@ export class UserController {
       await user.save();
 
       logger.info("User login success", { email: req.body.email });
-      res.status(201).json({ msg: "Usuário criado com sucesso!" });
+      res.status(201).json({ name: name, msg: "Usuário criado com sucesso!" });
     } catch (error) {
       logger.error("An error occurred", { error: "An error occurred" });
       res.status(500).json({ msg: error });

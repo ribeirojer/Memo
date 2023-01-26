@@ -39,9 +39,12 @@ export const Wrapper = styled.header`
     top: 3rem;
     right: 0rem;
     display: none;
-    background-color: #ffa500;
     flex-direction: column;
-    padding: 2rem;
+    background-color: #12263aff;
+    padding: 1.5rem;
+    border: 2px solid #ffa500;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 8px #000;
   }
   .icon:hover .options {
     display: flex;
@@ -49,6 +52,18 @@ export const Wrapper = styled.header`
   .options:hover {
     display: flex;
   }
+  .options span {
+    cursor: pointer;
+  }
+  .dashboardlinks {
+    display: flex;
+    align-items: center;
+  }
+  .dashboardlinks a {
+    text-decoration: none;
+    color: #fff;
+  }
+
   @media (max-width: 425px) {
     .loginWrapper {
       display: none;

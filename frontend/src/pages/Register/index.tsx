@@ -84,7 +84,6 @@ const Register = (props: Props) => {
             Aguarde...
           </Button>
         )}
-        {/*error && <Message msg={error} type="error" />*/}
       </form>
       <p>
         Já tem conta? <Link to="/login">Clique aqui</Link>

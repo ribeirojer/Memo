@@ -5,8 +5,17 @@ export const Wrapper = styled.header`
   padding: 0 2rem;
   gap: 2rem;
   .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #1a3753;
     width: 33vw;
+  }
+  .infoUser {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
   }
   .content {
     width: 66vw;

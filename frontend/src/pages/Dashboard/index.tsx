@@ -4,6 +4,8 @@ import Content from "../../components/Content";
 import imageLinks from "../../assets/images.json";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Calendary from "../../components/Calendar";
+import { UserCircle } from "phosphor-react";
 
 type Props = {};
 
@@ -17,11 +19,15 @@ const DashBoard = (props: Props) => {
       navigate("/login");
     }
   }, [auth.authenticated]);
-  
+
   return (
     <Wrapper>
       <div className="card">
-        <p>informações de {auth.user?.name}</p>
+        <div className="infoUser">
+          <UserCircle size={48} color={"#ffa500"} />
+          <h1>{auth.user?.name}</h1>
+        </div>
+        <Calendary></Calendary>
         <p>graficos</p>
       </div>
       <div className="content">

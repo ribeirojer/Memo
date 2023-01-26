@@ -16,20 +16,20 @@ const Header = (props: Props) => {
 
   return (
     <Wrapper id="header">
-      <Link to={"/"} className="logo">
+      <Link to={`${auth.authenticated ? "/dashboard" : "/"}`} className="logo">
         <Dog size={48} />
         <h1>Memo</h1>
       </Link>
 
-      <nav id="nav" className="loginWrapper">
-        <ul id="nav-links">
+      <nav className="loginWrapper">
+        <ul>
           {auth.user ? (
             <>
-              <li>
+              <li className="dashboardlinks">
                 <NavLink to="/dashboard">{auth.user.name}</NavLink>
               </li>
               <li className="icon">
-                <UserCircle size={48} />
+                <UserCircle size={48} color={"#ffa500"}/>
                 <div className="options">
                   <span>Configurações</span>
                   <span onClick={handleLogout}>Sair</span>
