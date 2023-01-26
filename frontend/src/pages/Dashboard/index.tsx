@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import { Wrapper } from "./Dashboard";
-import Content from "../../components/Content";
-import imageLinks from "../../assets/images.json";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Content from "../../components/Content";
+import imageLinks from "../../assets/images.json";
 import Calendary from "../../components/Calendar";
-import { UserCircle } from "phosphor-react";
+import Progress from "../../components/Progress";
 
 type Props = {};
 
@@ -23,12 +23,8 @@ const DashBoard = (props: Props) => {
   return (
     <Wrapper>
       <div className="card">
-        <div className="infoUser">
-          <UserCircle size={48} color={"#ffa500"} />
-          <h1>{auth.user?.name}</h1>
-        </div>
-        <Calendary></Calendary>
-        <p>graficos</p>
+        <Calendary />
+        <Progress />
       </div>
       <div className="content">
         {subjects &&
@@ -43,5 +39,11 @@ const DashBoard = (props: Props) => {
     </Wrapper>
   );
 };
+/*
+  <div className="infoUser">
+    <UserCircle size={48} color={"#ffa500"} />
+    <h1>{auth.user?.name}</h1>
+  </div>
+*/
 
 export default DashBoard;
