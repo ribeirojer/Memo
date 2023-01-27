@@ -12,8 +12,10 @@ app.use(cors());
 // Import routes
 import UserRoutes from "./routes/UserRoutes";
 import CardRoutes from "./routes/CardRoutes";
+import PictureRoutes from "./routes/PictureRoutes";
 
 // Use routes
+app.use("/pictures", PictureRoutes);
 app.use("/", UserRoutes);
 app.use("/", CardRoutes);
 

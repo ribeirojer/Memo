@@ -3,6 +3,7 @@ const mongooses = require("mongoose");
 
 mongooses.set("strictQuery", true);
 
+const PORT = process.env.PORT || 3000;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 
@@ -12,7 +13,7 @@ mongooses
   )
   .then(() => {
     console.log("Conectou ao banco!");
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
       console.log("o servidor está funcionando...");
     });
   })
