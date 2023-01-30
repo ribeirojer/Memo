@@ -2,10 +2,12 @@
 Projeto pessoal de uma tech startup, repetição espaçada de conteúdo de ensino médio.
 
 ### Frontend
-- NPM, Vite, Typescript, Git, React, Vitest, react-router-dom e Styled Components.
+- NPM, Vite, Typescript, Git, React, Vitest, react-router-dom e Styled Components,
+- gráficos com react-chartjs-2 e chart.js e calendário com react-calendar.
 
 ### Backend
-- NPM, Typescript, Git, Express, Vitest, MongoDb, Bcrypt, JsonWebToken e Supertest.
+- NPM, Typescript, Git, Express, Vitest, MongoDb, Bcrypt, JsonWebToken e Supertest,
+- envio de emails com nodemailer e logs com winston.
 
 
 Com o memo você aprende!
