@@ -32,6 +32,7 @@ const Header = (props: Props) => {
                 <UserCircle size={48} color={"#ffa500"}/>
                 <div className="options">
                   <span>Configurações</span>
+                  <input>Mudar imagem</input>
                   <span onClick={handleLogout}>Sair</span>
                 </div>
               </li>
