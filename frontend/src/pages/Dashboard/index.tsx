@@ -30,7 +30,7 @@ const DashBoard = (props: Props) => {
         {subjects &&
           subjects.map((item) => {
             return (
-              <span onClick={() => {}} key={item.id}>
+              <span onClick={() => {navigate(`/exercises/${item.id}`)}} key={item.id}>
                 <Content link={item.link} name={item.name} />
               </span>
             );

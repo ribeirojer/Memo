@@ -29,10 +29,10 @@ export class FlashCardController {
     }
   }
 
-  static async getOne(req, res): Promise<void> {
-    const id = req.params.id;
+  static async getBySubject(req, res): Promise<void> {
+    const subject = req.params.subject;
     try {
-      const card = await FlashCardModel.findOne({ _id: id });
+      const card = await FlashCardModel.find({ subject: subject });
       if (!card) {
         res.status(422).json({ message: "FlashCard não encontrado!" });
         return;

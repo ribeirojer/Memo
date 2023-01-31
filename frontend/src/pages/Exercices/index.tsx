@@ -11,7 +11,7 @@ const Exercices = (props: Props) => {
   const [first, setfirst] = useState<boolean>(false);
   const [item, setItem] = useState(0);
   const { subject } = useParams();
-  const url = "http://localhost:3000/flashcard";
+  const url = `http://localhost:3000/flashcard/${subject}`;
   const { data, isLoading, error } = useFetch(url);
 
   if (error) {

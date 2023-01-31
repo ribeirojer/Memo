@@ -9,7 +9,7 @@ const router = express.Router();
 // rotas
 router.post("/flashcard", validateFlashCard, FlashCardController.create);
 router.get("/flashcard", FlashCardController.getAll);
-router.get("/flashcard/:id", FlashCardController.getOne);
+router.get("/flashcard/:subject", FlashCardController.getBySubject);
 router.patch("/flashcard/:id", validateFlashCard, FlashCardController.update);
 router.delete("/flashcard/:id", FlashCardController.delete);
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.header`
+export const Wrapper = styled.section`
   display: flex;
   padding: 0 2rem;
   gap: 2rem;
@@ -21,13 +21,12 @@ export const Wrapper = styled.header`
     width: 66vw;
     background-color: #1a3753;
     padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
   }
   .content img {
-    width: 180px;
-    height: 150px;
+    max-width: 180px;
+    max-height: 150px;
   }
 `;
