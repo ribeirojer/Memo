@@ -33,8 +33,8 @@ const Exercices = (props: Props) => {
 
   return (
     <Wrapper className="wrapper">
-      <p>{dados[item].question}</p>
-      {first && <p>{dados[item].response}</p>}
+      <p className="question">{dados[item].question}</p>
+      {first && <p className="response">{dados[item].response}</p>}
       {!first && <p className="dot">.</p>}
       {!first && (
         <span onClick={() => setfirst(true)}>

@@ -4,26 +4,17 @@ export const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
-  .welcome {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    margin-top: 4rem;
+  height: 45vh;
+  justify-content: flex-end;
+
+  .question {
+    font-size: 2rem;
   }
-  .welcome div {
-    width: 450px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .welcome p {
-    font-size: 1.2rem;
-    margin: 1rem 0;
-  }
-  .welcome p span {
-    color: #ffa500;
+  .response {
+    width: 60vw;
+    margin: 3rem 0;
+    font-size: 1.3rem;
+    line-height: 2rem;
   }
   .wrapper {
     display: flex;
