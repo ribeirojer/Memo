@@ -5,10 +5,11 @@ import { Wrapper } from "./ListCards";
 type Props = {
   editCard: any;
   removeCard: any;
+  subject: string;
 };
 
-const ListCards = ({ editCard, removeCard }: Props) => {
-  const url = "http://localhost:3000/flashcard";
+const ListCards = ({ editCard, removeCard, subject }: Props) => {
+  const url = "http://localhost:3000/flashcard/"+subject;
   const { data, isLoading, error } = useFetch(url);
 
   if (error) {

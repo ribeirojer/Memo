@@ -115,13 +115,25 @@ const SendCard = (props: Props) => {
         <input type="submit" name="submit" value="Enviar" />
       </form>
       <div>
-        <span onClick={() => setIsShowItens(!isShowItens)}>
-          <Button color="#12263a" theme="#ffa500">
-            Mostar
-          </Button>
-        </span>
+        <div>
+          <span onClick={() => setIsShowItens(!isShowItens)}>
+            <Button color="#12263a" theme="#ffa500">
+              Mostar
+            </Button>
+          </span>
+          <select
+            value={selectedOption}
+            onChange={(event) => setSelectedOption(event.target.value)}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
         {isShowItens ? (
-          <ListCards editCard={editCard} removeCard={removeCard} />
+          <ListCards editCard={editCard} subject={selectedOption} removeCard={removeCard} />
         ) : null}
       </div>
     </Wrapper>

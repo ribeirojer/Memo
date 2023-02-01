@@ -5,14 +5,16 @@ import { Dog } from "phosphor-react";
 import { AuthContext } from "../../context/AuthContext";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { registerFormSchema } from "./utilsRegister";
 
 type Props = {};
 
 const Register = (props: Props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ const Register = (props: Props) => {
       navigate("/login");
     }
   }, [auth]);
-  
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -33,18 +35,31 @@ const Register = (props: Props) => {
     };
 
     try {
+      // Valida os dados do formulário de acordo com o esquema
+      const validatedData = await registerFormSchema.validate(user);
+      console.log(validatedData);
+    } catch (error: any) {
+      setError(error.message);
+      console.error(error.message);
+    }
+
+    try {
       await auth.register(user);
       if (auth.user?.name) {
         navigate("/login");
       }
-    } catch (error) {
+    } catch (error:any) {
+      setError(error);
       console.log(error);
     }
   };
 
   return (
     <Wrapper id="register">
-      <Dog size={54} color={"#ffa500"} />
+      <div>
+        <Dog size={54} color={"#ffa500"} />
+        <h2>{error}</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <Input
           type={"text"}
