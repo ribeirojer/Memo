@@ -4,6 +4,7 @@ import App from "./App";
 import { AuthProvider } from "./context/AuthProvider";
 import { RequireAuth } from "./context/RequireAuth";
 import "./index.css";
+import ChangePassword from "./pages/ChangePassword";
 import DashBoard from "./pages/Dashboard";
 import Exercices from "./pages/Exercices";
 import Experimentar from "./pages/Experimentar";
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="forgotpassword" element={<ForgotPassword />} />
+          <Route path="resetpassword/:token" element={<ChangePassword />} />
           <Route
             path="dashboard"
             element={

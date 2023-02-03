@@ -7,6 +7,7 @@ export type AuthContextData = {
   user: IUser | null;
   signIn: (user: IUser) => Promise<void>;
   register: (user: IUser) => Promise<void>;
+  changePassword: (props: any) => Promise<void>;
   signOut: () => void;
 }
 

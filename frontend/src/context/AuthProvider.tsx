@@ -47,6 +47,26 @@ export const AuthProvider = ({ children }: Props) => {
     localStorage.removeItem("token");
   };
 
+  const changePassword = async ({
+    token,
+    password,
+  }: {
+    token: string;
+    password: string;
+  }) => {
+    setIsLoading(true);
+    try {
+      // chamada a api para registrar o usuário
+      const response = await api.post(`reset-password/${token}`, password);
+      setUser(response.data);
+      authUser(response.data);
+    } catch (error: any) {
+      setIsError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   async function authUser(data: any) {
     setAuthenticated(true);
     localStorage.setItem("token", JSON.stringify(data.token));
@@ -61,6 +81,7 @@ export const AuthProvider = ({ children }: Props) => {
         register,
         signIn,
         signOut,
+        changePassword,
       }}
     >
       {children}
