@@ -99,11 +99,10 @@ export class UserController {
     const { email } = req.body;
     try {
       // check if user exists
-      const user = await User.findOne({ email });
+      const user = await UserModel.findOne({ email });
       if (!user) {
         return res.status(404).json({ msg: "Usuário não encontrado!" });
       }
-
       //generate token
       const secret = process.env.SECRET;
       const token = jwt.sign(
@@ -116,17 +115,18 @@ export class UserController {
 
       //send email
       const emailData = {
-        from: "myapp@email.com",
+        from: "eduardojerbr@gmail.com",
         to: email,
-        subject: "Recuperação de senha",
+        subject: "Recuperação de senha Memo",
         html: `
           <p>Você solicitou a recuperação de senha</p>
           <p>Clique no link abaixo para redefinir sua senha</p>
-          <p>http://localhost:3000/reset-password/${token}</p>
+          <a target="_blank" href="http://localhost:5173/reset-password/${token}">Clique aqui</a>
         `,
       };
 
       await sendEmail(emailData);
+
       res.status(200).json({ msg: "E-mail de recuperação de senha enviado!" });
     } catch (error) {
       res.status(500).json({ msg: error });
