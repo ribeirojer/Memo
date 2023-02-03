@@ -7,6 +7,7 @@ import "./index.css";
 import DashBoard from "./pages/Dashboard";
 import Exercices from "./pages/Exercices";
 import Experimentar from "./pages/Experimentar";
+import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="experimentar" element={<Experimentar />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="forgotpassword" element={<ForgotPassword />} />
           <Route
             path="dashboard"
             element={

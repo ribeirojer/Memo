@@ -13,7 +13,6 @@ export const Wrapper = styled.main`
   }
   .google {
     padding: 0.4rem 0.5rem;
-    margin-bottom: 1rem;
     background-color: transparent;
     border: 1px solid #ffa500;
     color: #ffa500;

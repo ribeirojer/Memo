@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Wrapper } from "./Login";
 import { auth } from "../../services/firebase";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
@@ -12,8 +12,8 @@ type Props = {};
 
 const Login = (props: Props) => {
   const [userFirebase, setUserFirebase] = useState<User>({} as User);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const authen = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -81,6 +81,7 @@ const Login = (props: Props) => {
           <button className="google" onClick={handleGoogleSignin}>
             <GoogleLogo size={32} />
           </button>
+          <p>Esqueceu a senha? <Link to={"/forgotpassword"}>Clique aqui</Link></p>
         </Wrapper>
       )}
     </div>
